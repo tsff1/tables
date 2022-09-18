@@ -112,11 +112,11 @@ def printTable(sortedTeams, teamNames):
 # teamNames: liste med lagnavn, avd: 0 = A, 1 = B
 # Lagres til Avd_X_table.png
 def createTable(sortedTeams, teamNames, avd):
-    img = Image.open('Background/Tabel_bg.png')
+    img = Image.open('Scripts/Backgrounds/Tabel_bg.png')
     size = img.size[1]
     ydab = size/13
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("Fonts/Aller_Bd.ttf", 25)
+    font = ImageFont.truetype("Scripts/Fonts/Aller_Bd.ttf", 25)
 
     for i, row in enumerate(sortedTeams):
         name = teamNames[int(row[0])]
@@ -127,7 +127,7 @@ def createTable(sortedTeams, teamNames, avd):
             draw.text((x, y),str(int(col)),(0,0,0),font=font)
 
     avdChr = chr(65 + avd)
-    img.save('Output/Avd_' + avdChr + '_table.png')
+    img.save('Scripts/Output/Avd_' + avdChr + '_table.png')
 
 def main(avd):
     df = readFromWeb(avd)

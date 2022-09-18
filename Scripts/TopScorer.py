@@ -21,11 +21,11 @@ def locateData(dataframe):
     return dataList
 
 def createTopScore(data, avd):
-    img = Image.open('Backgrounds/TopScorerBG.png')
+    img = Image.open('Scripts/Backgrounds/TopScorerBG.png')
     size = img.size[1]
     draw = ImageDraw.Draw(img)
-    fontS = ImageFont.truetype("Fonts/Aller_Bd.ttf", 25)
-    fontB = ImageFont.truetype("Fonts/Aller_Bd.ttf", 30)
+    fontS = ImageFont.truetype("Scripts/Fonts/Aller_Bd.ttf", 25)
+    fontB = ImageFont.truetype("Scripts/Fonts/Aller_Bd.ttf", 30)
     y = 230
     x = 270
     xOff = [54, 64, 73]
@@ -39,7 +39,7 @@ def createTopScore(data, avd):
             draw.text((x + 300, y),row[1],(0,0,0),font=fontB)
             draw.text((x + 640, y),str(row[2]),(0,0,0),font=fontB)
             y = y + 222 - i*10
-            logo = Image.open("Logoer - Runde/" + row[1] + ".png")
+            logo = Image.open("Scripts/Logoer - Runde/" + row[1] + ".png")
             size = (scale[i], scale[i])
             logo = logo.resize(size, Image.ANTIALIAS)
             img.paste(logo,(xOff[i], yOff[i]), mask = logo)
@@ -52,7 +52,7 @@ def createTopScore(data, avd):
         i+=1
 
     avdChr = chr(65 + avd)
-    img.save('Output/Avd_' + avdChr + '_TS.png')
+    img.save('Scripts/Output/Avd_' + avdChr + '_TS.png')
 
 def main(avd):
     data = readFromWeb(avd)
