@@ -21,11 +21,11 @@ def locateData(dataframe):
     return dataList
 
 def createTopScore(data, avd):
-    img = Image.open('TopScorerBG.png')
+    img = Image.open('Backgrounds/TopScorerBG.png')
     size = img.size[1]
     draw = ImageDraw.Draw(img)
-    fontS = ImageFont.truetype("Aller_Bd.ttf", 25)
-    fontB = ImageFont.truetype("Aller_Bd.ttf", 30)
+    fontS = ImageFont.truetype("Fonts/Aller_Bd.ttf", 25)
+    fontB = ImageFont.truetype("Fonts/Aller_Bd.ttf", 30)
     y = 230
     x = 270
     xOff = [54, 64, 73]
@@ -52,7 +52,7 @@ def createTopScore(data, avd):
         i+=1
 
     avdChr = chr(65 + avd)
-    img.save('Avd_' + avdChr + '_TS.png')
+    img.save('Output/Avd_' + avdChr + '_TS.png')
 
 def main(avd):
     data = readFromWeb(avd)
