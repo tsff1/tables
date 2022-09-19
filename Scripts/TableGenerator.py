@@ -35,6 +35,8 @@ def getData(dataList):
     teamData = {}
     teamNames = []
     for i, row in enumerate(dataList):
+        row[0] = row[0].strip()
+        row[-1] = row[-1].strip()
         if str(row[1]) != "nan" and str(row[2]) != "nan":
             if row[2] > row[1]:
                 awayPoints = 3
@@ -121,7 +123,10 @@ def createTable(sortedTeams, teamNames, avd):
     for i, row in enumerate(sortedTeams):
         name = teamNames[int(row[0])]
         y = (i+2)*ydab - 53
-        draw.text((60, y),name,(0,0,0),font=font)
+        logo = Image.open("Scripts/Logoer - Runde/" + name + ".png")
+        logo = logo.resize((50,50), Image.ANTIALIAS)
+        img.paste(logo,(55, int(y)-10), mask = logo)
+        draw.text((115, y),name,(0,0,0), font=font)
         for j, col in enumerate(row[1:]):
             x = 407 + j * 60
             draw.text((x, y),str(int(col)),(0,0,0),font=font)
