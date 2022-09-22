@@ -4,6 +4,7 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 from sklearn.utils import shuffle
+from datetime import date
 
 def readFromWeb(avd):
     if avd:
@@ -64,12 +65,24 @@ def createTopScore(data, avd):
     avdChr = chr(65 + avd)
     img.save('Scripts/Output/Avd_' + avdChr + '_TS.png')
 
+def updateTime(avd):
+    avdChr = chr(65 + avd)
+    today = date.today()
+    img = Image.open('Scripts/Backgrounds/Time_bg.png')
+    img = img.resize((300, 50), Image.ANTIALIAS)
+    fontT = ImageFont.truetype("Scripts/Fonts/OpenSans-Light.ttf", 20)
+    draw = ImageDraw.Draw(img)
+    draw.text((20, 20),"Sist oppdatert: " + today.strftime("%d/%m/%Y"),(0,0,0),font=fontT)
+    img.save('Scripts/Output/Avd_' + avdChr + '_Update.png')
+
+
 def main(avd):
     data = readFromWeb(avd)
     data = shuffle(data)
     data = data.sort_values("Mål", ascending=False)
     data = data.reset_index(drop=True)
     createTopScore(data, avd)
+    updateTime(avd)
 
 
 # Velg avdeling: A = 0, B = 1
