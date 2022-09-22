@@ -4,6 +4,7 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 from sklearn.utils import shuffle
+import os.path
 from datetime import date
 
 def readFromWeb(avd):
@@ -50,7 +51,10 @@ def createTopScore(data, avd):
             draw.text((x + 565, y),row[1],(0,0,0),font=fontB)
             draw.text((x + 895, y),str(row[2]),(0,0,0),font=fontB)
             y = y + 222 - index*10
-            logo = Image.open("Scripts/Logoer - Runde/" + row[1] + ".png")
+            if os.path.exists("Scripts/Toppscorers/" + row[0] + ".png"):
+                logo = Image.open("Scripts/Toppscorers/" + row[0] + ".png")
+            else:
+                logo = Image.open("Scripts/Logoer - Runde/" + row[1] + ".png")
             size = (scale[index], scale[index])
             logo = logo.resize(size, Image.ANTIALIAS)
             img.paste(logo,(xOff[index], yOff[index]), mask = logo)
@@ -86,6 +90,6 @@ def main(avd):
 
 
 # Velg avdeling: A = 0, B = 1
-avd = 0
+avd = 1
 
 main(avd)
