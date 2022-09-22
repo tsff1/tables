@@ -69,10 +69,10 @@ def updateTime(avd):
     avdChr = chr(65 + avd)
     today = date.today()
     img = Image.open('Scripts/Backgrounds/Time_bg.png')
-    img = img.resize((300, 50), Image.ANTIALIAS)
-    fontT = ImageFont.truetype("Scripts/Fonts/OpenSans-Light.ttf", 20)
+    img = img.resize((400, 40), Image.ANTIALIAS)
+    fontT = ImageFont.truetype("Scripts/Fonts/Aller_Bd.ttf", 30)
     draw = ImageDraw.Draw(img)
-    draw.text((20, 20),"Sist oppdatert: " + today.strftime("%d/%m/%Y"),(0,0,0),font=fontT)
+    draw.text((20, 0),"Sist oppdatert: " + today.strftime("%d/%m/%Y"),(0,0,0),font=fontT)
     img.save('Scripts/Output/Avd_' + avdChr + '_Update.png')
 
 
