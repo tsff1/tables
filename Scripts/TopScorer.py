@@ -90,6 +90,6 @@ def main(avd):
 
 
 # Velg avdeling: A = 0, B = 1
-avd = 1
+avd = 0
 
 main(avd)
