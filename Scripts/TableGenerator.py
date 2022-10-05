@@ -144,6 +144,6 @@ def main(avd):
 
 
 # Velg avdeling: A = 0, B = 1
-avd = 0
+avd = 1
 
 main(avd)
