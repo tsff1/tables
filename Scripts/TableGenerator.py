@@ -5,6 +5,7 @@ import pandas as pd
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
+from datetime import date
 
 # Henter data fra spreadsheet. 
 # avd: 0 = A, 1 = B
@@ -134,16 +135,27 @@ def createTable(sortedTeams, teamNames, avd):
     avdChr = chr(65 + avd)
     img.save('Scripts/Output/Avd_' + avdChr + '_table.png')
 
+def updateTime(avd):
+    avdChr = chr(65 + avd)
+    today = date.today()
+    img = Image.open('Scripts/Backgrounds/Time_bg.png')
+    img = img.resize((400, 40), Image.ANTIALIAS)
+    fontT = ImageFont.truetype("Scripts/Fonts/Aller_Bd.ttf", 30)
+    draw = ImageDraw.Draw(img)
+    draw.text((20, 0),"Sist oppdatert: " + today.strftime("%d/%m/%Y"),(0,0,0),font=fontT)
+    img.save('Scripts/Output/Avd_' + avdChr + '_Update.png')
+
 def main(avd):
     df = readFromWeb(avd)
     dataList = locateData(df)
     teamResults, teamNames = getData(dataList)
     sortedTeamResults = sortTeams(teamResults, teamNames)
     createTable(sortedTeamResults,teamNames,avd)
+    updateTime(avd)
 
 
 
 # Velg avdeling: A = 0, B = 1
-avd = 0
+avd = 1
 
 main(avd)
