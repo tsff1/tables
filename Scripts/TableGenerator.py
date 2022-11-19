@@ -116,16 +116,16 @@ def printTable(sortedTeams, teamNames):
 # teamNames: liste med lagnavn, avd: 0 = A, 1 = B
 # Lagres til Avd_X_table.png
 def createTable(sortedTeams, teamNames, avd):
-    img = Image.open('Scripts/Backgrounds/Tabel_bg.png')
+    img = Image.open('C:/Users/Simen/tables2/tables/Scripts/Backgrounds/Tabel_bg.png')
     size = img.size[1]
     ydab = size/13
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("Scripts/Fonts/Aller_Bd.ttf", 25)
+    font = ImageFont.truetype("C:/Users/Simen/tables2/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
 
     for i, row in enumerate(sortedTeams):
         name = teamNames[int(row[0])]
         y = (i+2)*ydab - 53
-        logo = Image.open("Scripts/Logoer - Runde/" + name + ".png")
+        logo = Image.open("C:/Users/Simen/tables2/tables/Scripts/Logoer - Runde/" + name + ".png")
         logo = logo.resize((50,50), Image.ANTIALIAS)
         img.paste(logo,(55, int(y)-10), mask = logo)
         draw.text((115, y),name,(0,0,0), font=font)
@@ -134,17 +134,17 @@ def createTable(sortedTeams, teamNames, avd):
             draw.text((x, y),str(int(col)),(0,0,0),font=font)
 
     avdChr = chr(65 + avd)
-    img.save('Scripts/Output/Avd_' + avdChr + '_table.png')
+    img.save('C:/Users/Simen/tables2/tables/Scripts/Output/Avd_' + avdChr + '_table.png')
 
 def updateTime(avd):
     avdChr = chr(65 + avd)
     today = date.today()
-    img = Image.open('Scripts/Backgrounds/Time_bg.png')
+    img = Image.open('C:/Users/Simen/tables2/tables/Scripts/Backgrounds/Time_bg.png')
     img = img.resize((400, 40), Image.ANTIALIAS)
-    fontT = ImageFont.truetype("Scripts/Fonts/Aller_Bd.ttf", 30)
+    fontT = ImageFont.truetype("C:/Users/Simen/tables2/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
     draw = ImageDraw.Draw(img)
     draw.text((20, 0),"Sist oppdatert: " + today.strftime("%d/%m/%Y"),(0,0,0),font=fontT)
-    img.save('Scripts/Output/Avd_' + avdChr + '_Update.png')
+    img.save('C:/Users/Simen/tables2/tables/Scripts/Output/Avd_' + avdChr + '_Update.png')
 
 def main(avd):
     df = readFromWeb(avd)

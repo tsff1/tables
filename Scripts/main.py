@@ -13,4 +13,5 @@ while not inp:
         avd = 1
     else:
         print(f"{avd} is not a group\n")
+        
 main(avd)
