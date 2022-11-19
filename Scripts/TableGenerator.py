@@ -39,6 +39,7 @@ def getData(dataList):
         row[0] = row[0].strip()
         row[-1] = row[-1].strip()
         if str(row[1]) != "nan" and str(row[2]) != "nan":
+            row[2], row[1] = int(row[2]), int(row[1])
             if row[2] > row[1]:
                 awayPoints = 3
                 homePoints = 0
@@ -156,6 +157,5 @@ def main(avd):
 
 
 # Velg avdeling: A = 0, B = 1
-avd = 1
-
+avd = 0
 main(avd)
