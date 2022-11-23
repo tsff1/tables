@@ -17,4 +17,6 @@ while end.lower() == "n":
     else:
         print(f"{avd} is not a group\n")
 
+print("Syncing updates...")
 git_push()
+print("Done")
