@@ -25,6 +25,7 @@ def locateData(dataframe):
 def createTopScore(data, avd):
     img = Image.open('Scripts/Backgrounds/TopScorerBG.png')
     size = img.size[1]
+    print(size)
     draw = ImageDraw.Draw(img)
     fontS = ImageFont.truetype("Scripts/Fonts/Aller_Bd.ttf", 25)
     fontB = ImageFont.truetype("Scripts/Fonts/Aller_Bd.ttf", 30)
