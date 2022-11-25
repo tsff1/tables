@@ -6,6 +6,7 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 from push import git_push
+from random import uniform
 
 name_nation = {"Ruben": "Irland", "Iver": "Qatar", "Martin": "Nigeria",
                "Odin": "Tyskland", "Vegard": "Romania", "Simen": "Japan"}
@@ -99,6 +100,9 @@ def get_bets(results):
         topp = ""
         for player in score:
             if score[player] > top:
+                top = score[player]
+                topp = player
+            elif score[player] == top and uniform(0, 1) < 0.4:
                 top = score[player]
                 topp = player
         sortedScore.append((topp, name_nation[topp], top))
