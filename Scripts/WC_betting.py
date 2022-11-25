@@ -86,7 +86,7 @@ def get_bets(results):
                         break
         i += 1
     file.close()
-
+    print(score)
     for player in score:
         tot = sum(score[player])
         score[player] = tot
