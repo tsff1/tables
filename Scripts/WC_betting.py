@@ -86,7 +86,11 @@ def get_bets(results):
                         break
         i += 1
     file.close()
-    print(score)
+    """"
+    for player in score:
+        print(player, score[player])
+        print("-----------------------------\n\n")
+    """
     for player in score:
         tot = sum(score[player])
         score[player] = tot
@@ -95,7 +99,7 @@ def get_bets(results):
     n = len(score)
     print(score)
     for i in range(n):
-        top = np.float("-inf")
+        top = float("-inf")
         topp = ""
         for player in score:
             if score[player] > top:
@@ -152,6 +156,7 @@ def createTopScore(data):
 
 
 results = get_results()
+print(results)
 sorted = get_bets(results)
 createTopScore(sorted)
 git_push()
