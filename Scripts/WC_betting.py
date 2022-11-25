@@ -86,11 +86,7 @@ def get_bets(results):
                         break
         i += 1
     file.close()
-    """"
-    for player in score:
-        print(player, score[player])
-        print("-----------------------------\n\n")
-    """
+
     for player in score:
         tot = sum(score[player])
         score[player] = tot
