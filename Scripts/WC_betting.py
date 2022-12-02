@@ -89,6 +89,7 @@ def get_bets(results):
     file.close()
 
     for player in score:
+        print(player, score)
         tot = sum(score[player])
         score[player] = tot
 
