@@ -83,19 +83,23 @@ def get_bets(results):
                                 game_score = 1
                             elif homeR < awayR and homeG < awayG:
                                 game_score = 1
+                        #score[names[n]].append((home, away,"|",homeG,awayG,"|",homeR,awayR,"|",game_score))
                         score[names[n]].append(game_score)
                         break
         i += 1
     file.close()
 
     for player in score:
-        print(player, score)
+        #print(player)
+        #for game in score[player]:
+            #print(game)
+        #print("----------------------------------")
         tot = sum(score[player])
         score[player] = tot
 
     sortedScore = []
     n = len(score)
-    print(score)
+    #print(score)
     for i in range(n):
         top = float("-inf")
         topp = ""
