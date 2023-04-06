@@ -33,6 +33,7 @@ def insertResults(matches: pd.DataFrame, results, avd):
             if result != None:
                 matches.at[index, "H"] = int(result[0])
                 matches.at[index, "B"] = int(result[-1])
+    matches.fillna("")
     dfi.export(matches, f'C:/Users/Simen/tables2/tables/Scripts/Output/V23/matches_{avd.upper()}.png', table_conversion='matplotlib')
 
     # Justerer kolonne-bredder
