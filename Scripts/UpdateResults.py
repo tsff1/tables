@@ -33,8 +33,10 @@ def insertResults(matches: pd.DataFrame, results, avd):
             if result != None:
                 matches.at[index, "H"] = int(result[0])
                 matches.at[index, "B"] = int(result[-1])
-    matches.fillna("")
-    dfi.export(matches, f'C:/Users/Simen/tables2/tables/Scripts/Output/V23/matches_{avd.upper()}.png', table_conversion='matplotlib')
+    matchesexp = matches.fillna("")
+    matchesexp = matchesexp.set_index("Runde")
+    dfi.export(matchesexp, f'C:/Users/Simen/tables2/tables/Scripts/Output/V23/matches_{avd.upper()}.png', table_conversion='matplotlib')
+
 
     # Justerer kolonne-bredder
     writer = pd.ExcelWriter(f'C:/Users/Simen/tables2/tables/Scripts/Kamper/V23/{avd.upper()}-sluttspill.xlsx') 
