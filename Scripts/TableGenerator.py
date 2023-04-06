@@ -157,5 +157,6 @@ def main(avd):
     dataList = locateData(df)
     teamResults, teamNames = getData(dataList)
     sortedTeamResults = sortTeams(teamResults, teamNames)
+    printTable(sortedTeamResults, teamNames)
     createTable(sortedTeamResults,teamNames,avd)
     updateTime(avd)
