@@ -7,14 +7,22 @@ from PIL import ImageFont
 from PIL import ImageDraw
 from datetime import date
 
+playoff = True
+season = "V23"
+
 # Henter data fra spreadsheet. 
-# avd: 0 = A, 1 = B
 # return: pandas dataframe med data
 def readFromWeb(avd):
-    if avd:
-        sheet_id = "1LgMuGeBLz6pPJ7UzxWTTYRUK6uWNe3n34JeG0djM36U" # Avdeling B
+    avd = avd.lower()
+    if avd == "a":
+        sheet_id = "17rbJuo7wcTNJaOsgPsxINsjbcVM22o5lNfShTgNaMcc" # Avdeling A
+    elif avd == "b":
+        sheet_id = "1kuCumwCYQw2ksqtRrtDhMhPtuN8XHLJmi_iacrYSeME" # Avdeling B
+    elif avd == "c":
+        sheet_id = "1kuCumwCYQw2ksqtRrtDhMhPtuN8XHLJmi_iacrYSeME" # Avdeling C
     else:
-        sheet_id = "1ltRMXLKCC3XdhglsLxQT6W4u2lX7RcuwgttWd5ek6lA" # Avdeling A
+        sheet_id = "1kuCumwCYQw2ksqtRrtDhMhPtuN8XHLJmi_iacrYSeME" # Avdeling D
+
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv")
 
 # Leser gjennom dataframe og henter ut interessant data
@@ -133,18 +141,16 @@ def createTable(sortedTeams, teamNames, avd):
             x = 407 + j * 60
             draw.text((x, y),str(int(col)),(0,0,0),font=font)
 
-    avdChr = chr(65 + avd)
-    img.save('C:/Users/Simen/tables2/tables/Scripts/Output/Avd_' + avdChr + '_table.png')
+    img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_table.png')
 
 def updateTime(avd):
-    avdChr = chr(65 + avd)
     today = date.today()
     img = Image.open('C:/Users/Simen/tables2/tables/Scripts/Backgrounds/Time_bg.png')
     img = img.resize((400, 40), Image.ANTIALIAS)
     fontT = ImageFont.truetype("C:/Users/Simen/tables2/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
     draw = ImageDraw.Draw(img)
     draw.text((20, 0),"Sist oppdatert: " + today.strftime("%d/%m/%Y"),(0,0,0),font=fontT)
-    img.save('C:/Users/Simen/tables2/tables/Scripts/Output/Avd_' + avdChr + '_Update.png')
+    img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_Update.png')
 
 def main(avd):
     df = readFromWeb(avd)
@@ -153,9 +159,3 @@ def main(avd):
     sortedTeamResults = sortTeams(teamResults, teamNames)
     createTable(sortedTeamResults,teamNames,avd)
     updateTime(avd)
-
-
-
-# Velg avdeling: A = 0, B = 1
-avd = 0
-main(avd)
