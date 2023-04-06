@@ -28,8 +28,8 @@ def getMatches(avd):
 def insertResults(matches: pd.DataFrame, results, avd):
 
     for index, row in matches.iterrows():
-        if str(row[0])[:4] != "Week" and str(row[1]) != "NaN":
-            result = results.get(str(row[0])+"-"+str(row[4]))
+        if str(row[0]) != "NaN":
+            result = results.get(str(row[1])+"-"+str(row[5]))
             if result != None:
                 matches.at[index, "H"] = int(result[0])
                 matches.at[index, "B"] = int(result[-1])

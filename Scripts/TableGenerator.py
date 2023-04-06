@@ -34,7 +34,7 @@ def locateData(dataframe):
     dataList = []
     for index, row in dataframe.iterrows():
         if str(row[0])[:4] not in ["Week", "nan"]:
-            newRow = [row[i] for i in [0,1,3,4]]
+            newRow = [row[i] for i in [1,2,4,5]]
             dataList.append(newRow)
     return dataList
 
@@ -44,6 +44,7 @@ def locateData(dataframe):
 def getData(dataList):
     teamData = {}
     teamNames = []
+    print(dataList)
     for i, row in enumerate(dataList):
         row[0] = row[0].strip()
         row[-1] = row[-1].strip()
@@ -141,7 +142,7 @@ def createTable(sortedTeams, teamNames, avd):
         for j, col in enumerate(row[1:]):
             x = 407 + j * 60
             draw.text((x, y),str(int(col)),(0,0,0),font=font)
-            
+
     img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_table.png')
 
 def updateTime(avd):
