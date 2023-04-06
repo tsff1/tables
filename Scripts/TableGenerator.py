@@ -141,7 +141,7 @@ def createTable(sortedTeams, teamNames, avd):
         for j, col in enumerate(row[1:]):
             x = 407 + j * 60
             draw.text((x, y),str(int(col)),(0,0,0),font=font)
-    print("ja")
+            
     img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_table.png')
 
 def updateTime(avd):
