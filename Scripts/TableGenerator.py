@@ -17,11 +17,11 @@ def readFromWeb(avd):
     if avd == "a":
         sheet_id = "17rbJuo7wcTNJaOsgPsxINsjbcVM22o5lNfShTgNaMcc" # Avdeling A
     elif avd == "b":
-        sheet_id = "1kuCumwCYQw2ksqtRrtDhMhPtuN8XHLJmi_iacrYSeME" # Avdeling B
+        sheet_id = "1hht164njb2CBPlf5VEyTmQNM6piNbRvuifY62TssNWk" # Avdeling B
     elif avd == "c":
-        sheet_id = "1kuCumwCYQw2ksqtRrtDhMhPtuN8XHLJmi_iacrYSeME" # Avdeling C
+        sheet_id = "1DqP6uhITVd8V3yNc_SsISA8vOcpR_OfDyqKK5EPIaWs" # Avdeling C
     else:
-        sheet_id = "1kuCumwCYQw2ksqtRrtDhMhPtuN8XHLJmi_iacrYSeME" # Avdeling D
+        sheet_id = "1zM03JZ1h9e_oq9urDb6Yk85bVQ9f9uSWyDqlU9yWkIk" # Avdeling D
 
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv")
 
