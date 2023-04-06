@@ -44,7 +44,6 @@ def locateData(dataframe):
 def getData(dataList):
     teamData = {}
     teamNames = []
-    print(dataList)
     for i, row in enumerate(dataList):
         row[0] = row[0].strip()
         row[-1] = row[-1].strip()
