@@ -17,7 +17,6 @@ def getResults(data_raw):
         results[key] = val
     return results
 
-
 # Henter kampopsett fra fil på github
 def getMatches(avd):
     with open(f'C:/Users/Simen/tables2/tables/Scripts/Kamper/V23/{avd.upper()}-sluttspill.xlsx', "rb") as file:
@@ -31,12 +30,8 @@ def insertResults(matches: pd.DataFrame, results, avd):
         if str(row[0]) != "NaN":
             result = results.get(str(row[1])+"-"+str(row[5]))
             if result != None:
-                matches.at[index, "H"] = str(int(result[0]))
-                matches.at[index, "B"] = str((result[-1]))
-    matchesexp = matches.fillna("")
-    matchesexp = matchesexp.set_index("Runde")
-    dfi.export(matchesexp, f'C:/Users/Simen/tables2/tables/Scripts/Output/V23/matches_{avd.upper()}.png', table_conversion='matplotlib')
-
+                matches.at[index, "H"] = int(result[0])
+                matches.at[index, "B"] = int(result[-1])
 
     # Justerer kolonne-bredder
     writer = pd.ExcelWriter(f'C:/Users/Simen/tables2/tables/Scripts/Kamper/V23/{avd.upper()}-sluttspill.xlsx') 
