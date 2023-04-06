@@ -7,7 +7,7 @@ from PIL import ImageFont
 from PIL import ImageDraw
 from datetime import date
 
-playoff = True
+nteams = 6
 season = "V23"
 
 # Henter data fra spreadsheet. 
@@ -84,7 +84,7 @@ def getData(dataList):
             else:
                 teamNames.append(row[-1])
                 teamData[row[-1]] = [len(teamNames)-1,1,awayPoints//3,homePoints%3,int(not bool(awayPoints)),row[2],row[1],row[2]-row[1],awayPoints]
-        elif i < 6:
+        elif i < int(nteams/2):
             teamNames.append(row[0])
             teamData[row[0]] = [len(teamNames)-1,0,0,0,0,0,0,0,0]
 
