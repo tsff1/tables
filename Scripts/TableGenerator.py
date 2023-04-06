@@ -34,7 +34,7 @@ def locateData(dataframe):
     dataList = []
     for index, row in dataframe.iterrows():
         if str(row[0])[:4] not in ["Week", "nan"]:
-            newRow = [row[i] for i in [1,2,4,5]]
+            newRow = [row[i] for i in [0,1,3,4]]
             dataList.append(newRow)
     return dataList
 
