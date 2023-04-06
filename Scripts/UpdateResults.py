@@ -1,11 +1,6 @@
-from turtle import home
-
-import numpy as np
 import pandas as pd
-from PIL import Image
-from PIL import ImageFont
-from PIL import ImageDraw
-from datetime import date
+import dataframe_image as dfi
+
 
 # Henter kamprapporter fra spreadsheet på nett
 def readFromWeb():
@@ -38,6 +33,7 @@ def insertResults(matches: pd.DataFrame, results, avd):
             if result != None:
                 matches.at[index, "H"] = int(result[0])
                 matches.at[index, "B"] = int(result[-1])
+    dfi.export(matches, f'C:/Users/Simen/tables2/tables/Scripts/Output/V23/matches_{avd.upper()}.png', table_conversion='matplotlib')
 
     # Justerer kolonne-bredder
     writer = pd.ExcelWriter(f'C:/Users/Simen/tables2/tables/Scripts/Kamper/V23/{avd.upper()}-sluttspill.xlsx') 
