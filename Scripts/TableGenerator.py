@@ -126,7 +126,7 @@ def printTable(sortedTeams, teamNames):
 def createTable(sortedTeams, teamNames, avd):
     img = Image.open(f'C:/Users/Simen/tables2/tables/Scripts/Backgrounds/Tabel_bg_{season}.png')
     size = img.size[1]
-    ydab = size/13
+    ydab = size/(nteams+1)
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("C:/Users/Simen/tables2/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
 
