@@ -36,7 +36,7 @@ season = "V23"
 def getStats(data_raw: pd.DataFrame) -> dict:
     stats = {}
     for index, row in data_raw.iterrows():
-        break             # TA BORT
+        break             # TA BORT!!
         name = ""
         home = row[1]
         homePlayers = {}
