@@ -36,6 +36,7 @@ season = "V23"
 def getStats(data_raw: pd.DataFrame) -> dict:
     stats = {}
     for index, row in data_raw.iterrows():
+        break             # TA BORT
         name = ""
         home = row[1]
         homePlayers = {}
@@ -167,7 +168,7 @@ def getStats(data_raw: pd.DataFrame) -> dict:
             except KeyError:
                 print(f"Player number '{elem[0]}' not found in {away}'s team")
 
-        return stats
+    return stats
 
 # Gjør om 'stats' dictionary til en df og sorterer etter gitt indeks
 # index: 1 = yellow, 2 = red, 3 = goals
