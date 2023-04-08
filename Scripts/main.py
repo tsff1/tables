@@ -23,6 +23,6 @@ stats = input("Update stats? [y/n] ").lower()
 if stats == "y":
     us.main()
 
-print("Syncing updates...")
+print("\nSyncing updates...")
 git_push()
 print("Done")
