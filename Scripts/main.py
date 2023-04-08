@@ -1,4 +1,5 @@
 import TableGenerator as tg
+import UpdateStats as us
 from push import git_push
 
 avds = "abcd"
@@ -17,6 +18,10 @@ while end.lower() == "n":
         end = input("Done? [y/n] ")
     else:
         print(f"{avd.upper()} is not a group\n")
+
+stats = input("Update stats? [y/n] ").lower()
+if stats == "y":
+    us.main()
 
 print("Syncing updates...")
 git_push()

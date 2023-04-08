@@ -6,7 +6,7 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 from datetime import date
-import UpdateResultsStats as urs
+import UpdateResults as ur
 
 nteams = 6
 season = "V23"
@@ -157,10 +157,11 @@ def updateTime(avd, stats = False):
         img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_Update.png')
 
 def main(avd):
-    urs.main(avd)
+    ur.main(avd)
     updateTime(avd, stats=True)
     #df = readFromWeb(avd)
-    df = urs.getMatches(avd)
+
+    df = ur.getMatches(avd)
     dataList = locateData(df)
     teamResults, teamNames = getData(dataList)
     sortedTeamResults = sortTeams(teamResults, teamNames)
