@@ -6,7 +6,7 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 from datetime import date
-import UpdateResults as ur
+import UpdateResultsStats as urs
 
 nteams = 6
 season = "V23"
@@ -144,19 +144,23 @@ def createTable(sortedTeams, teamNames, avd):
 
     img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_table.png')
 
-def updateTime(avd):
+def updateTime(avd, stats = False):
     today = date.today()
     img = Image.open('C:/Users/Simen/tables2/tables/Scripts/Backgrounds/Time_bg.png')
     img = img.resize((400, 40), Image.ANTIALIAS)
     fontT = ImageFont.truetype("C:/Users/Simen/tables2/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
     draw = ImageDraw.Draw(img)
     draw.text((20, 0),"Sist oppdatert: " + today.strftime("%d/%m/%Y"),(0,0,0),font=fontT)
-    img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_Update.png')
+    if stats:
+        img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Stats_Update.png')
+    else:
+        img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_Update.png')
 
 def main(avd):
-    ur.main(avd)
+    urs.main(avd)
+    updateTime(avd, stats=True)
     #df = readFromWeb(avd)
-    df = ur.getMatches(avd)
+    df = urs.getMatches(avd)
     dataList = locateData(df)
     teamResults, teamNames = getData(dataList)
     sortedTeamResults = sortTeams(teamResults, teamNames)
