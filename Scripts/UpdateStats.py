@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import pandas as pd
 from UpdateResults import readFromWeb
+import string
 
 leagues = {"Energi FK": "A",
            "NTNUI Samba": "A",
@@ -43,7 +44,7 @@ def getStats(data_raw: pd.DataFrame) -> dict:
             for elem in row[6].split():
                 try:
                     newNum = int(elem)
-                    homePlayers[oldNum] = name.strip()
+                    homePlayers[oldNum] = string.capwords(name.strip())
                     name = ""
                     oldNum = newNum
                 except ValueError:
@@ -51,7 +52,7 @@ def getStats(data_raw: pd.DataFrame) -> dict:
                 except NameError:
                     oldNum = newNum
             try:
-                homePlayers[oldNum] = name.strip()
+                homePlayers[oldNum] = string.capwords(name.strip())
                 homeStats = True
             except Exception:
                 homeStats = False
@@ -65,7 +66,7 @@ def getStats(data_raw: pd.DataFrame) -> dict:
             for elem in row[11].split():
                 try:
                     newNum = int(elem)
-                    awayPlayers[oldNum] = name.strip()
+                    awayPlayers[oldNum] = string.capwords(name.strip())
                     name = ""
                     oldNum = newNum
                 except ValueError:
@@ -73,7 +74,7 @@ def getStats(data_raw: pd.DataFrame) -> dict:
                 except NameError:
                     oldNum = newNum
             try:
-                awayPlayers[oldNum] = name.strip()
+                awayPlayers[oldNum] = string.capwords(name.strip())
                 awayStats = True
             except Exception:
                 awayStats = False
@@ -219,7 +220,7 @@ def createStatImage(df: pd.DataFrame, index: int):
         logo = Image.open("C:/Users/Simen/tables2/tables/Scripts/Logoer - Runde/" + teamname + ".png")
         logo = logo.resize((50,50), Image.ANTIALIAS)
         img.paste(logo,(400, int(y)-10), mask = logo)
-        draw.text((60, y-2),playername,(0,0,0), font=fontM)
+        draw.text((60, y-2),playername,(0,0,0), font=font)
         draw.text((460, y),teamname,(0,0,0), font=font)
         draw.text((750, y),leagues[teamname],(0,0,0),font=font)
         draw.text((827, y-5),str(stat),(0,0,0),font=fontBig)
