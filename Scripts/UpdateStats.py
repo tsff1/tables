@@ -220,7 +220,7 @@ def createStatImage(df: pd.DataFrame, index: int):
         logo = Image.open("C:/Users/Simen/tables2/tables/Scripts/Logoer - Runde/" + teamname + ".png")
         logo = logo.resize((50,50), Image.ANTIALIAS)
         img.paste(logo,(400, int(y)-10), mask = logo)
-        draw.text((60, y-2),playername,(0,0,0), font=font)
+        draw.text((55, y),playername,(0,0,0), font=font)
         draw.text((460, y),teamname,(0,0,0), font=font)
         draw.text((750, y),leagues[teamname],(0,0,0),font=font)
         draw.text((827, y-5),str(stat),(0,0,0),font=fontBig)
