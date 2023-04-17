@@ -54,6 +54,7 @@ def getStats(data_raw: pd.DataFrame) -> dict:
             homePlayers[oldNum] = string.capwords(name.strip())
             homeStats = True
         except Exception:
+            print(f"{home}'s stats missing for game {home}-{away}")
             homeStats = False
 
         if homeStats:
@@ -76,6 +77,7 @@ def getStats(data_raw: pd.DataFrame) -> dict:
             awayPlayers[oldNum] = string.capwords(name.strip())
             awayStats = True
         except Exception:
+            print(f"{away}'s stats missing for game {home}-{away}")
             awayStats = False
 
         if awayStats:
