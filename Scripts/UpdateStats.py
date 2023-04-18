@@ -196,6 +196,7 @@ def getStats(data_raw: pd.DataFrame) -> dict:
 def createStats(index: int, stats: dict) -> pd.DataFrame:
     df = pd.DataFrame(stats)
     df = df.transpose()
+    df = df.sample(frac=1)
     df = df.sort_values(by=index, ascending=False)
     return df
 
