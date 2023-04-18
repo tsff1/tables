@@ -37,51 +37,44 @@ season = "V23"
 def getStats(data_raw: pd.DataFrame) -> dict:
     stats = {}
     for index, row in data_raw.iterrows():
-        name = ""
         home = row[1]
-        homePlayers = {}
-        for elem in row[6].split():
-            try:
-                newNum = int(elem)
-                homePlayers[oldNum] = string.capwords(name.strip())
-                name = ""
-                oldNum = newNum
-            except ValueError:
-                name += " " + elem
-            except NameError:
-                oldNum = newNum
-        try:
-            homePlayers[oldNum] = string.capwords(name.strip())
-            homeStats = True
-        except Exception:
-            print(f"{home}'s stats missing for game '{home} - {away}'")
-            homeStats = False
-
-        if homeStats:
-            del oldNum
-
-        name = ""
         away = row[2]
-        awayPlayers = {}
-        for elem in row[11].split():
-            try:
-                newNum = int(elem)
-                awayPlayers[oldNum] = string.capwords(name.strip())
-                name = ""
-                oldNum = newNum
-            except ValueError:
-                name += " " + elem
-            except NameError:
-                oldNum = newNum
-        try:
-            awayPlayers[oldNum] = string.capwords(name.strip())
-            awayStats = True
-        except Exception:
-            print(f"{away}'s stats missing for game '{home} - {away}'")
-            awayStats = False
 
-        if awayStats:
-            del oldNum
+        homePlayers = {}
+        for elem in row[6].split("\n"):
+            i = 1
+            numFound = False
+            elem = elem.strip()
+            while True:
+                try:
+                    num = int(elem[:i])
+                except ValueError:
+                    if numFound:
+                        homePlayers[num] = string.capwords(elem[(i-1):].strip())
+                        break
+                    else:
+                        break
+                else:
+                    numFound = True
+                    i += 1
+
+        awayPlayers = {}
+        for elem in row[11].split("\n"):
+            i = 1
+            numFound = False
+            elem = elem.strip()
+            while True:
+                try:
+                    num = int(elem[:i])
+                except ValueError:
+                    if numFound:
+                        awayPlayers[num] = string.capwords(elem[(i-1):].strip())
+                        break
+                    else:
+                        break
+                else:
+                    numFound = True
+                    i += 1
 
         try:
             yellowH = row[7].replace(" ", "").split()
@@ -111,80 +104,90 @@ def getStats(data_raw: pd.DataFrame) -> dict:
 
 
         # yellow cards home
-        if homeStats:
-            for elem in yellowH:
-                elem = elem.split(":")
+        for elem in yellowH:
+            elem = elem.split(":")
+            try:
+                player = homePlayers[int(elem[0])]
                 try:
-                    player = homePlayers[int(elem[0])]
-                    try:
-                        stats[player][1] += int(elem[-1])
-                    except KeyError:
-                        stats[player] = [home, int(elem[-1]), 0, 0]
+                    stats[player][1] += int(elem[-1])
                 except KeyError:
-                    print(f"Player number '{elem[0]}' not found in {home}'s team")
+                    stats[player] = [home, int(elem[-1]), 0, 0]
+            except KeyError:
+                print(f"Player number '{elem[0]}' not found in {home}'s team")
+            except ValueError:
+                print(f"Stats missing for game '{home} - {away}'. Problem: '{elem}'")
 
 
-            # red cards home
-            for elem in redH:
-                elem = elem.split(":")
+        # red cards home
+        for elem in redH:
+            elem = elem.split(":")
+            try:
+                player = homePlayers[int(elem[0])]
                 try:
-                    player = homePlayers[int(elem[0])]
-                    try:
-                        stats[player][2] += int(elem[-1])
-                    except KeyError:
-                        stats[player] = [home, 0, int(elem[-1]), 0]
+                    stats[player][2] += int(elem[-1])
                 except KeyError:
-                    print(f"Player number '{elem[0]}' not found in {home}'s team")
+                    stats[player] = [home, 0, int(elem[-1]), 0]
+            except KeyError:
+                print(f"Player number '{elem[0]}' not found in {home}'s team")
+            except ValueError:
+                print(f"Stats missing for game '{home} - {away}'. Problem: '{elem}'")
 
 
-            # goals home
-            for elem in goalsH:
-                elem = elem.split(":")
+        # goals home
+        for elem in goalsH:
+            elem = elem.split(":")
+            try:
+                player = homePlayers[int(elem[0])]
                 try:
-                    player = homePlayers[int(elem[0])]
-                    try:
-                        stats[player][3] += int(elem[-1])
-                    except KeyError:
-                        stats[player] = [home, 0, 0, int(elem[-1])]
+                    stats[player][3] += int(elem[-1])
                 except KeyError:
-                    print(f"Player number '{elem[0]}' not found in {home}'s team")
+                    stats[player] = [home, 0, 0, int(elem[-1])]
+            except KeyError:
+                print(f"Player number '{elem[0]}' not found in {home}'s team")
+            except ValueError:
+                print(f"Stats missing for game '{home} - {away}'. Problem: '{elem}'")
 
         # yellow cards away
-        if awayStats:
-            for elem in yellowA:
-                elem = elem.split(":")
+        for elem in yellowA:
+            elem = elem.split(":")
+            try:
+                player = awayPlayers[int(elem[0])]
                 try:
-                    player = awayPlayers[int(elem[0])]
-                    try:
-                        stats[player][1] += int(elem[-1])
-                    except KeyError:
-                        stats[player] = [away, int(elem[-1]), 0, 0]
+                    stats[player][1] += int(elem[-1])
                 except KeyError:
-                    print(f"Player number '{elem[0]}' not found in {away}'s team")
+                    stats[player] = [away, int(elem[-1]), 0, 0]
+            except KeyError:
+                print(f"Player number '{elem[0]}' not found in {away}'s team")
+            except ValueError:
+                print(f"Stats missing for game '{home} - {away}'. Problem: '{elem}'")
 
-            # red cards away
-            for elem in redA:
-                elem = elem.split(":")
+        # red cards away
+        for elem in redA:
+            elem = elem.split(":")
+            try:
+                player = awayPlayers[int(elem[0])]
                 try:
-                    player = awayPlayers[int(elem[0])]
-                    try:
-                        stats[player][2] += int(elem[-1])
-                    except KeyError:
-                        stats[player] = [away, 0, int(elem[-1]), 0]
+                    stats[player][2] += int(elem[-1])
                 except KeyError:
-                    print(f"Player number '{elem[0]}' not found in {away}'s team")
+                    stats[player] = [away, 0, int(elem[-1]), 0]
+            except KeyError:
+                print(f"Player number '{elem[0]}' not found in {away}'s team")
+            except ValueError:
+                print(f"Stats missing for game '{home} - {away}'. Problem: '{elem}'")
 
-            # goals away
-            for elem in goalsA:
-                elem = elem.split(":")
+        # goals away
+        for elem in goalsA:
+            elem = elem.split(":")
+            try:
+                player = awayPlayers[int(elem[0])]
                 try:
-                    player = awayPlayers[int(elem[0])]
-                    try:
-                        stats[player][3] += int(elem[-1])
-                    except KeyError:
-                        stats[player] = [away, 0, 0, int(elem[-1])]
+                    stats[player][3] += int(elem[-1])
                 except KeyError:
-                    print(f"Player number '{elem[0]}' not found in {away}'s team")
+                    stats[player] = [away, 0, 0, int(elem[-1])]
+            except KeyError:
+                print(f"Player number '{elem[0]}' not found in {away}'s team")
+            except ValueError:
+                print(f"Stats missing for game '{home} - {away}'. Problem: '{elem}'")
 
     return stats
 
