@@ -32,6 +32,7 @@ def insertResults(matches: pd.DataFrame, results, avd):
             if result != None:
                 matches.at[index, "H"] = int(result[0])
                 matches.at[index, "B"] = int(result[-1])
+                del results[str(row[0])+"-"+str(row[4])]
 
     # Justerer kolonne-bredder
     writer = pd.ExcelWriter(f'C:/Users/Simen/tables2/tables/Scripts/Kamper/V23/{avd.upper()}-sluttspill.xlsx') 
@@ -42,6 +43,10 @@ def insertResults(matches: pd.DataFrame, results, avd):
         col_idx = matches.columns.get_loc(column)
         writer.sheets['Sheet1'].set_column(col_idx, col_idx, column_length+2)
     writer.close()
+
+    for teams, result in results.items():
+        if result != None:
+            print("Match", teams, "not found")
 
     
 def main(avd):
