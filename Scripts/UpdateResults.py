@@ -2,6 +2,31 @@ import pandas as pd
 import dataframe_image as dfi
 from PIL import Image, ImageDraw, ImageFont
 
+leagues = {"Energi FK": "A",
+           "NTNUI Samba": "A",
+           "Marin FK": "A",
+           "Omega FK": "A",
+           "HSK": "A",
+           "Janus FK": "A",
+           "Tihlde Pythons": "B",
+           "NTNUI Champs": "B",
+           "FK Steindølene 1": "B",
+           "Pareto FK": "B",
+           "Wolves of Ballstreet": "B",
+           "Datakameratene FK": "B",
+           "Realkameratene FK": "C",
+           "Smøreguttene": "C",
+           "Hattfjelldal United": "C",
+           "Chemie FK": "C",
+           "DMFC": "C",
+           "Salt IF": "C",
+           "Petroleum FK": "D",
+           "Balldura": "D",
+           "Tim og Shænko": "D",
+           "CAF": "D",
+           "Omega Løkka": "D",
+           "FK Steindølene 2": "D"}
+
 # Henter kamprapporter fra spreadsheet på nett
 def readFromWeb():
     sheet_id = "1kuCumwCYQw2ksqtRrtDhMhPtuN8XHLJmi_iacrYSeME"
@@ -46,7 +71,9 @@ def insertResults(matches: pd.DataFrame, results, avd):
 
     for teams, result in results.items():
         if result != None:
-            print("Match", teams, "not found")
+            teams = teams.split("-")
+            if leagues[teams[0]] == avd.upper():
+                print("Match '" + teams + "' not found")
 
     
 def main(avd):
