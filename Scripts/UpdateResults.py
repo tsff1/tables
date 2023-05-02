@@ -73,7 +73,7 @@ def insertResults(matches: pd.DataFrame, results, avd):
         if result != None:
             teams = teams.split("-")
             if leagues[teams[0]] == avd.upper():
-                print("Match '" + teams + "' not found")
+                print("Match '" + teams[0] + " - " + teams[1] + "' not found")
 
     
 def main(avd):
