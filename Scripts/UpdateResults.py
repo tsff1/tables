@@ -55,6 +55,7 @@ def insertResults(matches: pd.DataFrame, results, avd):
         if str(row[0]) != "NaN":
             result = results.get(str(row[0])+"-"+str(row[4]))
             if result != None:
+                result = result.split("-")
                 matches.at[index, "H"] = int(result[0])
                 matches.at[index, "B"] = int(result[-1])
                 del results[str(row[0])+"-"+str(row[4])]
