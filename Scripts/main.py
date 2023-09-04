@@ -2,18 +2,20 @@ import TableGenerator as tg
 import UpdateStats as us
 from push import git_push
 
-avds = "abcd"
+avds = {"a": 14,
+        "b": 24}
+
 
 end = "n"
 while end.lower() == "n":
     avd = input("What table to update? ").lower()
     if avd == "all":
-        for avd in avds:
-            tg.main(avd)
+        for avd, n_teams in avds.items():
+            tg.main(avd, n_teams)
             print(f"Table {avd.upper()} updated\n")
         end = "y"
     elif avd in avds:
-        tg.main(avd)
+        tg.main(avd, avds[avd])
         print(f"Table {avd.upper()} updated\n")
         end = input("Done? [y/n] ")
     else:

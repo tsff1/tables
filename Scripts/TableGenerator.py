@@ -8,21 +8,16 @@ from PIL import ImageDraw
 from datetime import date
 import UpdateResults as ur
 
-nteams = 6
-season = "V23"
+season = "H23"
 
 # Henter data fra spreadsheet. 
 # return: pandas dataframe med data
 def readFromWeb(avd):
     avd = avd.lower()
     if avd == "a":
-        sheet_id = "17rbJuo7wcTNJaOsgPsxINsjbcVM22o5lNfShTgNaMcc" # Avdeling A
+        sheet_id = "1uBY1RF7wU22mnZYtn9lw_EFCmk9hPIMKyNQ-FXQrVi4" # Avdeling A
     elif avd == "b":
-        sheet_id = "1hht164njb2CBPlf5VEyTmQNM6piNbRvuifY62TssNWk" # Avdeling B
-    elif avd == "c":
-        sheet_id = "1DqP6uhITVd8V3yNc_SsISA8vOcpR_OfDyqKK5EPIaWs" # Avdeling C
-    else:
-        sheet_id = "1zM03JZ1h9e_oq9urDb6Yk85bVQ9f9uSWyDqlU9yWkIk" # Avdeling D
+        sheet_id = "1PiVSrZUv9lZutOG7Wrpngx_lDfgfdc3Tj2ByerjBOJw" # Avdeling B
 
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv")
 
@@ -41,7 +36,7 @@ def locateData(dataframe):
 # Leser gjennom dataList og regner ut lags resultater til en dictionary
 # Value-format: lagindeks, kamper spilt, vunnet, uavgjort, tapt, mål for, mål mot, målforskjell, poeng
 # Return: matrise med et lag på hver rad, liste med lagnavn
-def getData(dataList):
+def getData(dataList, nteams):
     teamData = {}
     teamNames = []
     for i, row in enumerate(dataList):
@@ -124,8 +119,8 @@ def printTable(sortedTeams, teamNames):
 # sortedTeams: numpy-matrise med sorterte lagresultater
 # teamNames: liste med lagnavn, avd: 0 = A, 1 = B
 # Lagres til Avd_X_table.png
-def createTable(sortedTeams, teamNames, avd):
-    img = Image.open(f'C:/Users/Simen/tables2/tables/Scripts/Backgrounds/Tabel_bg_{season}.png')
+def createTable(sortedTeams, teamNames, avd, nteams):
+    img = Image.open(f'C:/Users/Simen/tables2/tables/Scripts/Backgrounds/Tabel_bg_{avd.upper()}_{season}.png')
     size = img.size[1]
     ydab = size/(nteams+1)
     draw = ImageDraw.Draw(img)
@@ -156,15 +151,18 @@ def updateTime(avd, stats = False):
     else:
         img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_Update.png')
 
-def main(avd):
+def main(avd, nteams):
     ur.main(avd)
     updateTime(avd, stats=True)
     #df = readFromWeb(avd)
 
     df = ur.getMatches(avd)
     dataList = locateData(df)
-    teamResults, teamNames = getData(dataList)
+    teamResults, teamNames = getData(dataList,nteams)
     sortedTeamResults = sortTeams(teamResults, teamNames)
     #printTable(sortedTeamResults, teamNames)
-    createTable(sortedTeamResults,teamNames,avd)
+    createTable(sortedTeamResults,teamNames,avd,nteams)
     updateTime(avd)
+
+if __name__ == "__main__":
+    main()
