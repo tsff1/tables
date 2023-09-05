@@ -65,6 +65,7 @@ def getData(dataList, nteams):
                 teamData[row[0]][8] += homePoints
                 
             else:
+                print(row[0])
                 teamNames.append(row[0])
                 teamData[row[0]] = [len(teamNames)-1,1,homePoints//3,homePoints%3,int(not bool(homePoints)),row[1],row[2],row[1]-row[2],homePoints]
 
@@ -78,6 +79,7 @@ def getData(dataList, nteams):
                 teamData[row[-1]][7] += row[2] - row[1]
                 teamData[row[-1]][8] += awayPoints
             else:
+                print(row[-1])
                 teamNames.append(row[-1])
                 teamData[row[-1]] = [len(teamNames)-1,1,awayPoints//3,homePoints%3,int(not bool(awayPoints)),row[2],row[1],row[2]-row[1],awayPoints]
         elif i < int(nteams/2):
