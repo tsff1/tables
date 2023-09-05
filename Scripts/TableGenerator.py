@@ -159,6 +159,7 @@ def main(avd, nteams):
     df = ur.getMatches(avd)
     dataList = locateData(df)
     teamResults, teamNames = getData(dataList,nteams)
+    print(teamNames)
     sortedTeamResults = sortTeams(teamResults, teamNames)
     #printTable(sortedTeamResults, teamNames)
     createTable(sortedTeamResults,teamNames,avd,nteams)
