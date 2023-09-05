@@ -3,7 +3,7 @@ import UpdateStats as us
 from push import git_push
 
 avds = {"a": 14,
-        "b": 24}
+        "b": 13}
 
 
 end = "n"
