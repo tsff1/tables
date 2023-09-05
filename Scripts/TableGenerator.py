@@ -43,6 +43,7 @@ def getData(dataList, nteams):
         row[0] = row[0].strip()
         row[-1] = row[-1].strip()
         if str(row[1]) != "nan" and str(row[2]) != "nan":
+            print(row)
             row[2], row[1] = int(row[2]), int(row[1])
             if row[2] > row[1]:
                 awayPoints = 3
