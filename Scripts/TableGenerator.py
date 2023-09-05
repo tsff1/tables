@@ -42,6 +42,7 @@ def getData(dataList, nteams):
     for i, row in enumerate(dataList):
         row[0] = row[0].strip()
         row[-1] = row[-1].strip()
+        print(row)
         if str(row[1]) != "nan" and str(row[2]) != "nan":
             print(row)
             row[2], row[1] = int(row[2]), int(row[1])
@@ -81,10 +82,12 @@ def getData(dataList, nteams):
             else:
                 teamNames.append(row[-1])
                 teamData[row[-1]] = [len(teamNames)-1,1,awayPoints//3,homePoints%3,int(not bool(awayPoints)),row[2],row[1],row[2]-row[1],awayPoints]
-        elif i < int(nteams/2):
+        
+        if row[0] not in teamData:
             teamNames.append(row[0])
             teamData[row[0]] = [len(teamNames)-1,0,0,0,0,0,0,0,0]
 
+        if row[-1] not in teamData:
             teamNames.append(row[-1])
             teamData[row[-1]] = [len(teamNames)-1,0,0,0,0,0,0,0,0]
     
