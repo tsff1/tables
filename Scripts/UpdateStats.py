@@ -3,32 +3,35 @@ import pandas as pd
 from UpdateResults import readFromWeb
 import string
 
-leagues = {"Energi FK": "A",
+leagues = {"Energi FK": "B",
            "NTNUI Samba": "A",
-           "Marin FK": "A",
+           "Marin FK": "B",
            "Omega FK": "A",
            "HSK": "A",
-           "Janus FK": "A",
-           "Tihlde Pythons": "B",
+           "Janus FK": "B",
+           "Tihlde Pythons": "A",
            "NTNUI Champs": "B",
-           "FK Steindølene 1": "B",
+           "FK Steindølene 1": "A",
            "Pareto FK": "B",
-           "Wolves of Ballstreet": "B",
-           "Datakameratene FK": "B",
-           "Realkameratene FK": "C",
-           "Smøreguttene": "C",
-           "Hattfjelldal United": "C",
-           "Chemie FK": "C",
-           "DMFC": "C",
-           "Salt IF": "C",
-           "Petroleum FK": "D",
-           "Balldura": "D",
-           "Tim og Shænko": "D",
-           "CAF": "D",
-           "Omega Løkka": "D",
-           "FK Steindølene 2": "D"}
+           "Wolves of Ballstreet": "A",
+           "Datakameratene FK": "A",
+           "Realkameratene FK": "B",
+           "Smøreguttene FK": "B",
+           "Hattfjelldal United": "B",
+           "Chemie FK": "B",
+           "Salt IF": "A",
+           "Petroleum FK": "A",
+           "Tim og Shænko": "B",
+           "CAF": "A",
+           "Omega Løkka": "B",
+           "FK Steindølene 2": "B",
+           "FK Hånd Til Munn": "B",
+           "Knekken":"A",
+           "MiT Fotball":"A",
+           "Hybrida FK": "A",
+           "Erudio Herrer": "A"}
 
-season = "V23"
+season = "H23"
 
 # Kode for spillerstatistikk
 # Funkjsonen bruker dataen gitt fra df laget av kamprapport spreadsheet

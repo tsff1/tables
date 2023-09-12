@@ -16,7 +16,7 @@ leagues = {"Energi FK": "B",
            "Wolves of Ballstreet": "A",
            "Datakameratene FK": "A",
            "Realkameratene FK": "B",
-           "Smøreguttene": "B",
+           "Smøreguttene FK": "B",
            "Hattfjelldal United": "B",
            "Chemie FK": "B",
            "Salt IF": "A",
@@ -25,18 +25,17 @@ leagues = {"Energi FK": "B",
            "CAF": "A",
            "Omega Løkka": "B",
            "FK Steindølene 2": "B",
-           "FK Hånd TIl Munn": "B",
+           "FK Hånd Til Munn": "B",
            "Knekken":"A",
            "MiT Fotball":"A",
            "Hybrida FK": "A",
-           "Eurido Herrer": "A"}
+           "Erudio Herrer": "A"}
 
 season = "H23"
 
 # Henter kamprapporter fra spreadsheet på nett
 def readFromWeb():
-    sheet_id = "2PACX-1vTZVv2iLPw7flQwoRe0zsw1IBfXTZ1mAcYjmQ6wJk_6rDJyulqwi2dm0nJx5BgaM0wudg5MjGWSQIBm"
-    print(pd.read_csv(f"https://docs.google.com/spreadsheets/d/e/{sheet_id}/pub?output=csv"))
+    sheet_id = "2PACX-1vTfARjOGgNjbWeQnlO1E99wDIuv4gLde3MfHNqr5UF1yGGclOstZ4De2iriRT39usFvcZXnbat71Nbe"
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/e/{sheet_id}/pub?output=csv")
 
 # Henter ut resultater fra spreadsheet dataframe
