@@ -69,12 +69,14 @@ def getStats(data_raw: pd.DataFrame) -> dict:
             while True:
                 try:
                     num = int(elem[:i])
-                except ValueError:
+                except Exception:
                     if numFound:
                         awayPlayers[num] = string.capwords(elem[(i-1):].strip())
                         break
                     else:
                         break
+                if i > len(elem):
+                    break
                 else:
                     numFound = True
                     i += 1
@@ -237,8 +239,17 @@ def createStatImage(df: pd.DataFrame, index: int):
     img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/{statname}.png')
 
 def main():
+    print("\nUpdating stats:")
+    print("Reading from web...")
     data_raw = readFromWeb()
+    print("Collecting stats...")
     stats = getStats(data_raw)
     for i in range(1,4):
+        if i == 1:
+            print("Updating yellow cards...")
+        elif i == 2:
+            print("Updating red cards...")
+        else:
+            print("Updating goals...")
         df = createStats(i, stats)
         createStatImage(df, i)

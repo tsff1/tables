@@ -42,9 +42,7 @@ def getData(dataList, nteams):
     for i, row in enumerate(dataList):
         row[0] = row[0].strip()
         row[-1] = row[-1].strip()
-        print(row)
         if str(row[1]) != "nan" and str(row[2]) != "nan":
-            print(row)
             row[2], row[1] = int(row[2]), int(row[1])
             if row[2] > row[1]:
                 awayPoints = 3
@@ -163,7 +161,6 @@ def main(avd, nteams):
     df = ur.getMatches(avd)
     dataList = locateData(df)
     teamResults, teamNames = getData(dataList,nteams)
-    print(teamNames)
     sortedTeamResults = sortTeams(teamResults, teamNames)
     #printTable(sortedTeamResults, teamNames)
     createTable(sortedTeamResults,teamNames,avd,nteams)
