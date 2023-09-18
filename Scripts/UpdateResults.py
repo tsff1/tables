@@ -43,7 +43,7 @@ def readFromWeb():
 def getResults(data_raw):
     results = {}
     for index, row in data_raw.iterrows():
-        print(row[1], row[2])
+        #print(row[1], row[2])
         key = row[1]+"-"+row[2]
         val = row[5]
         results[key] = val
