@@ -57,8 +57,6 @@ def getMatches(avd):
 
 # Oppdaterer excel-fil med resultater hentet fra kamprapporter
 def insertResults(matches: pd.DataFrame, results, avd):
-    print(results)
-    print(matches)
 
     for index, row in matches.iterrows():
         if str(row[0]) != "NaN":
