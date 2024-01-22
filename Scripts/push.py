@@ -1,6 +1,6 @@
 from git import Repo
 
-PATH_OF_GIT_REPO = r"C:\Users\Simen\Tables2\tables"
+PATH_OF_GIT_REPO = r"C:\Users\andre\Documents\NTNU\JS2023\TSFF\tables"
 COMMIT_MESSAGE = 'Updated table'
 
 def git_push():
