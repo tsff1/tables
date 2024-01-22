@@ -122,36 +122,36 @@ def printTable(sortedTeams, teamNames):
 # teamNames: liste med lagnavn, avd: 0 = A, 1 = B
 # Lagres til Avd_X_table.png
 def createTable(sortedTeams, teamNames, avd, nteams):
-    img = Image.open(f'C:/Users/Simen/tables2/tables/Scripts/Backgrounds/Tabel_bg_{avd.upper()}_{season}.png')
+    img = Image.open(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Backgrounds/Tabel_bg_{avd.upper()}_{season}.png')
     size = img.size[1]
     ydab = size/(nteams+1)
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("C:/Users/Simen/tables2/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
+    font = ImageFont.truetype("C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
 
     for i, row in enumerate(sortedTeams):
         name = teamNames[int(row[0])]
         y = (i+2)*ydab - 53
-        logo = Image.open("C:/Users/Simen/tables2/tables/Scripts/Logoer - Runde/" + name + ".png")
-        logo = logo.resize((50,50), Image.ANTIALIAS)
+        logo = Image.open("C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Logoer - Runde/" + name + ".png")
+        logo = logo.resize((50,50), Image.Resampling.LANCZOS)
         img.paste(logo,(55, int(y)-10), mask = logo)
         draw.text((115, y),name,(0,0,0), font=font)
         for j, col in enumerate(row[1:]):
             x = 407 + j * 60
             draw.text((x, y),str(int(col)),(0,0,0),font=font)
 
-    img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_table.png')
+    img.save(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_table.png')
 
 def updateTime(avd, stats = False):
     today = date.today()
-    img = Image.open('C:/Users/Simen/tables2/tables/Scripts/Backgrounds/Time_bg.png')
-    img = img.resize((400, 40), Image.ANTIALIAS)
-    fontT = ImageFont.truetype("C:/Users/Simen/tables2/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
+    img = Image.open('C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Backgrounds/Time_bg.png')
+    img = img.resize((400, 40), Image.Resampling.LANCZOS)
+    fontT = ImageFont.truetype("C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
     draw = ImageDraw.Draw(img)
     draw.text((20, 0),"Sist oppdatert: " + today.strftime("%d/%m/%Y"),(0,0,0),font=fontT)
     if stats:
-        img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Stats_Update.png')
+        img.save(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Output/{season}/Stats_Update.png')
     else:
-        img.save(f'C:/Users/Simen/tables2/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_Update.png')
+        img.save(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_Update.png')
 
 def main(avd, nteams):
     ur.main(avd)

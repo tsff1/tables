@@ -51,7 +51,7 @@ def getResults(data_raw):
 
 # Henter kampopsett fra fil på github
 def getMatches(avd):
-    with open(f'C:/Users/Simen/tables2/tables/Scripts/Kamper/{season}/Avd {avd.upper()}.xlsx', "rb") as file:
+    with open(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Kamper/{season}/Avd {avd.upper()}.xlsx', "rb") as file:
         file = pd.read_excel(file)
     return file
 
@@ -68,13 +68,12 @@ def insertResults(matches: pd.DataFrame, results, avd):
                 del results[str(row[0])+"-"+str(row[4])]
 
     # Justerer kolonne-bredder
-    writer = pd.ExcelWriter(f'C:/Users/Simen/tables2/tables/Scripts/Kamper/{season}/Avd {avd.upper()}.xlsx') 
+    writer = pd.ExcelWriter(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Kamper/{season}/Avd {avd.upper()}.xlsx') 
     matches.to_excel(writer, sheet_name='Sheet1', index=False, na_rep='')
 
     for column in matches:
         column_length = max(matches[column].astype(str).map(len).max(), len(column))
         col_idx = matches.columns.get_loc(column)
-        writer.sheets['Sheet1'].set_column(col_idx, col_idx, column_length+2)
     writer.close()
 
     for teams, result in results.items():
