@@ -8,7 +8,7 @@ from PIL import ImageDraw
 from datetime import date
 import UpdateResults as ur
 
-season = "H23"
+season = "V24"
 
 # Henter data fra spreadsheet. 
 # return: pandas dataframe med data
@@ -19,7 +19,7 @@ def readFromWeb(avd):
     elif avd == "b":
         sheet_id = "1PiVSrZUv9lZutOG7Wrpngx_lDfgfdc3Tj2ByerjBOJw" # Avdeling B
 
-    return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv")
+    return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv", verify=False)
 
 # Leser gjennom dataframe og henter ut interessant data
 # dataframe: pandas dataframe med data
@@ -28,7 +28,7 @@ def readFromWeb(avd):
 def locateData(dataframe):
     dataList = []
     for index, row in dataframe.iterrows():
-        if str(row[0])[:4] not in ["Week", "nan"]:
+        if str(row.iloc[0])[:4] not in ["Week", "nan"]:
             newRow = [row[i] for i in [0,1,3,4]]
             dataList.append(newRow)
     return dataList
@@ -37,6 +37,7 @@ def locateData(dataframe):
 # Value-format: lagindeks, kamper spilt, vunnet, uavgjort, tapt, mål for, mål mot, målforskjell, poeng
 # Return: matrise med et lag på hver rad, liste med lagnavn
 def getData(dataList, nteams):
+    print(dataList)
     teamData = {}
     teamNames = []
     for i, row in enumerate(dataList):
@@ -122,16 +123,16 @@ def printTable(sortedTeams, teamNames):
 # teamNames: liste med lagnavn, avd: 0 = A, 1 = B
 # Lagres til Avd_X_table.png
 def createTable(sortedTeams, teamNames, avd, nteams):
-    img = Image.open(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Backgrounds/Tabel_bg_{avd.upper()}_{season}.png')
+    img = Image.open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Backgrounds/V24/Table_bg_{avd.upper()}_{season}.png')
     size = img.size[1]
     ydab = size/(nteams+1)
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
+    font = ImageFont.truetype("/Users/eliasheimdal/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
 
     for i, row in enumerate(sortedTeams):
         name = teamNames[int(row[0])]
         y = (i+2)*ydab - 53
-        logo = Image.open("C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Logoer - Runde/" + name + ".png")
+        logo = Image.open("/Users/eliasheimdal/Desktop/tables/Scripts/Logoer - Runde/" + name + ".png")
         logo = logo.resize((50,50), Image.Resampling.LANCZOS)
         img.paste(logo,(55, int(y)-10), mask = logo)
         draw.text((115, y),name,(0,0,0), font=font)
@@ -139,19 +140,19 @@ def createTable(sortedTeams, teamNames, avd, nteams):
             x = 407 + j * 60
             draw.text((x, y),str(int(col)),(0,0,0),font=font)
 
-    img.save(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_table.png')
+    img.save(f'/Users/eliasheimdal/Desktop/tables/Scripts/Output/{season}/' + avd.upper() + '-sluttspill_table.png')
 
 def updateTime(avd, stats = False):
     today = date.today()
-    img = Image.open('C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Backgrounds/Time_bg.png')
+    img = Image.open('/Users/eliasheimdal/Desktop/tables/Scripts/Backgrounds/Time_bg.png')
     img = img.resize((400, 40), Image.Resampling.LANCZOS)
-    fontT = ImageFont.truetype("C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
+    fontT = ImageFont.truetype("/Users/eliasheimdal/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
     draw = ImageDraw.Draw(img)
     draw.text((20, 0),"Sist oppdatert: " + today.strftime("%d/%m/%Y"),(0,0,0),font=fontT)
     if stats:
-        img.save(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Output/{season}/Stats_Update.png')
+        img.save(f'/Users/eliasheimdal/Desktop/tables/Scripts/Output/{season}/Stats_Update.png')
     else:
-        img.save(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Output/{season}/Avd_' + avd.upper() + '_Update.png')
+        img.save(f'/Users/eliasheimdal/Desktop/tables/Scripts/Output/{season}/'+ avd.upper()+ '-sluttspill_Update.png')
 
 def main(avd, nteams):
     ur.main(avd)

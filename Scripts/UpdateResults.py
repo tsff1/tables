@@ -2,40 +2,43 @@ import pandas as pd
 import dataframe_image as dfi
 from PIL import Image, ImageDraw, ImageFont
 from create_leagues import distribute_teams
+import ssl
 
-leagues = {"Energi FK": "B",
+ssl._create_default_https_context = ssl._create_unverified_context
+
+leagues = {"Energi FK": "A",
            "NTNUI Samba": "A",
            "Marin FK": "B",
-           "Omega FK": "B",
-           "HSK": "A",
+           "Omega FK": "C",
+           "HSK": "C",
            "Janus FK": "B",
-           "Tihlde Pythons": "A",
-           "NTNUI Champs": "B",
+           "Tihlde Pythons": "B",
+           "NTNUI Champs": "C",
            "FK Steindølene 1": "A",
-           "Pareto FK": "B",
-           "Wolves of Ballstreet": "A",
+           "Pareto FK": "A",
+           "Wolves of Ballstreet": "B",
            "Datakameratene FK": "A",
-           "Realkameratene FK": "B",
-           "Smøreguttene FK": "B",
+           "Realkameratene FK": "D",
+           "Smøreguttene FK": "D",
            "Hattfjelldal United": "B",
-           "Chemie FK": "B",
-           "Salt IF": "A",
-           "Petroleum FK": "A",
-           "Tim&Shænko": "B",
-           "CAF": "A",
-           "Omega Løkka": "A",
-           "FK Steindølene 2": "B",
-           "FK Hånd Til Munn": "B",
-           "Knekken":"A",
-           "MiT Fotball":"A",
-           "Hybrida FK": "A",
-           "Erudio Herrer": "A"}
+           "Chemie FK": "E",
+           "Salt IF": "B",
+           "Petroleum FK": "D",
+           "Tim&Shænko": "D",
+           "CAF": "D",
+           "Omega Løkka": "D",
+           "FK Steindølene 2": "A",
+           "FK Hånd Til Munn": "C",
+           "Knekken":"E",
+           "MiT Fotball":"E",
+           "Hybrida FK": "C",
+           "Erudio Herrer": "C"}
 
-season = "H23"
+season = "V24"
 
 # Henter kamprapporter fra spreadsheet på nett
 def readFromWeb():
-    sheet_id = "2PACX-1vTfARjOGgNjbWeQnlO1E99wDIuv4gLde3MfHNqr5UF1yGGclOstZ4De2iriRT39usFvcZXnbat71Nbe"
+    sheet_id = "2PACX-1vQuJYr5tl-zKfRpFUSsQaQ9yfxRa0U_k11gI9ke5PmFkBbdRROC5bLb8hks8r69KObhq4ISKapphr-9"
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/e/{sheet_id}/pub?output=csv")
 
 # Henter ut resultater fra spreadsheet dataframe
@@ -51,7 +54,7 @@ def getResults(data_raw):
 
 # Henter kampopsett fra fil på github
 def getMatches(avd):
-    with open(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Kamper/{season}/Avd {avd.upper()}.xlsx', "rb") as file:
+    with open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx', "rb") as file:
         file = pd.read_excel(file)
     return file
 
@@ -59,8 +62,8 @@ def getMatches(avd):
 def insertResults(matches: pd.DataFrame, results, avd):
 
     for index, row in matches.iterrows():
-        if str(row[0]) != "NaN":
-            result = results.get(str(row[0])+"-"+str(row[4]))
+        if str(row.iloc[0]) != "NaN":
+            result = results.get(str(row.iloc[0])+"-"+str(row.iloc[4]))
             if result != None:
                 result = result.split("-")
                 matches.at[index, "H"] = int(result[0])
@@ -68,7 +71,7 @@ def insertResults(matches: pd.DataFrame, results, avd):
                 del results[str(row[0])+"-"+str(row[4])]
 
     # Justerer kolonne-bredder
-    writer = pd.ExcelWriter(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Kamper/{season}/Avd {avd.upper()}.xlsx') 
+    writer = pd.ExcelWriter(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx') 
     matches.to_excel(writer, sheet_name='Sheet1', index=False, na_rep='')
 
     for column in matches:

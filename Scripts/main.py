@@ -2,8 +2,11 @@ import TableGenerator as tg
 import UpdateStats as us
 from push import git_push
 
-avds = {"a": 14,
-        "b": 13}
+avds = {"a": 6,
+        "b": 6,
+        "c": 6,
+        "d": 6,
+        "e": 3}
 
 
 end = "n"

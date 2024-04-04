@@ -3,35 +3,39 @@ import pandas as pd
 from UpdateResults import readFromWeb
 import string
 
-leagues = {"Energi FK": "B",
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
+
+leagues = {"Energi FK": "A",
            "NTNUI Samba": "A",
            "Marin FK": "B",
-           "Omega FK": "A",
-           "HSK": "A",
+           "Omega FK": "C",
+           "HSK": "C",
            "Janus FK": "B",
-           "Tihlde Pythons": "A",
-           "NTNUI Champs": "B",
+           "Tihlde Pythons": "B",
+           "NTNUI Champs": "C",
            "FK Steindølene 1": "A",
-           "Pareto FK": "B",
-           "Wolves of Ballstreet": "A",
+           "Pareto FK": "A",
+           "Wolves of Ballstreet": "B",
            "Datakameratene FK": "A",
-           "Realkameratene FK": "B",
-           "Smøreguttene FK": "B",
+           "Realkameratene FK": "D",
+           "Smøreguttene FK": "D",
            "Hattfjelldal United": "B",
-           "Chemie FK": "B",
-           "Salt IF": "A",
-           "Petroleum FK": "A",
-           "Tim&Shænko": "B",
-           "CAF": "A",
-           "Omega Løkka": "B",
-           "FK Steindølene 2": "B",
-           "FK Hånd Til Munn": "B",
-           "Knekken":"A",
-           "MiT Fotball":"A",
-           "Hybrida FK": "A",
-           "Erudio Herrer": "A"}
+           "Chemie FK": "E",
+           "Salt IF": "B",
+           "Petroleum FK": "D",
+           "Tim&Shænko": "D",
+           "CAF": "D",
+           "Omega Løkka": "D",
+           "FK Steindølene 2": "A",
+           "FK Hånd Til Munn": "C",
+           "Knekken":"E",
+           "MiT Fotball":"E",
+           "Hybrida FK": "C",
+           "Erudio Herrer": "C"}
 
-season = "H23"
+season = "V24"
 
 # Kode for spillerstatistikk
 # Funkjsonen bruker dataen gitt fra df laget av kamprapport spreadsheet
@@ -210,13 +214,13 @@ def createStats(index: int, stats: dict) -> pd.DataFrame:
 # index: 1 = yellow, 2 = red, 3 = goals
 def createStatImage(df: pd.DataFrame, index: int):
     statname = [None, "Yellows", "Reds", "Goals"][index]
-    img = Image.open(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Backgrounds/Stat_bg.png')
+    img = Image.open(f'C:/Users/eliasheimdal/Desktop/tables/Scripts/Backgrounds/Stat_bg.png')
     size = img.size[1]
     ydab = size/13
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
-    fontM = ImageFont.truetype("C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Fonts/Aller_Bd.ttf", 27)
-    fontBig = ImageFont.truetype("C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
+    font = ImageFont.truetype("C:/Users/eliasheimdal/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
+    fontM = ImageFont.truetype("C:/Users/eliasheimdal/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 27)
+    fontBig = ImageFont.truetype("C:/Users/eliasheimdal/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
 
     i = 0
     for ind, row in df.iterrows():
@@ -227,7 +231,7 @@ def createStatImage(df: pd.DataFrame, index: int):
             break
 
         y = (i+2)*ydab - 53
-        logo = Image.open("C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Logoer - Runde/" + teamname + ".png")
+        logo = Image.open("C:/Users/eliasheimdal/Desktop/tables/Scripts/Logoer - Runde/" + teamname + ".png")
         logo = logo.resize((50,50), Image.Resampling.LANCZOS)
         img.paste(logo,(400, int(y)-10), mask = logo)
         draw.text((52, y+2),playername,(0,0,0), font=font)
@@ -236,7 +240,7 @@ def createStatImage(df: pd.DataFrame, index: int):
         draw.text((827, y-5),str(stat),(0,0,0),font=fontBig)
         i += 1
 
-    img.save(f'C:/Users/andre/Documents/NTNU/JS2023/TSFF/tables/Scripts/Output/{season}/{statname}.png')
+    img.save(f'C:/Users/eliasheimdal/Desktop/tables/Scripts/Output/{season}/{statname}.png')
 
 def main():
     print("\nUpdating stats:")
