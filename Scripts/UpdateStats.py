@@ -214,13 +214,13 @@ def createStats(index: int, stats: dict) -> pd.DataFrame:
 # index: 1 = yellow, 2 = red, 3 = goals
 def createStatImage(df: pd.DataFrame, index: int):
     statname = [None, "Yellows", "Reds", "Goals"][index]
-    img = Image.open(f'C:/Users/eliasheimdal/Desktop/tables/Scripts/Backgrounds/Stat_bg.png')
+    img = Image.open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Backgrounds/Stat_bg.png')
     size = img.size[1]
     ydab = size/13
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("C:/Users/eliasheimdal/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
-    fontM = ImageFont.truetype("C:/Users/eliasheimdal/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 27)
-    fontBig = ImageFont.truetype("C:/Users/eliasheimdal/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
+    font = ImageFont.truetype("/Users/eliasheimdal/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
+    fontM = ImageFont.truetype("/Users/eliasheimdal/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 27)
+    fontBig = ImageFont.truetype("/Users/eliasheimdal/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
 
     i = 0
     for ind, row in df.iterrows():
@@ -231,7 +231,7 @@ def createStatImage(df: pd.DataFrame, index: int):
             break
 
         y = (i+2)*ydab - 53
-        logo = Image.open("C:/Users/eliasheimdal/Desktop/tables/Scripts/Logoer - Runde/" + teamname + ".png")
+        logo = Image.open("/Users/eliasheimdal/Desktop/tables/Scripts/Logoer - Runde/" + teamname + ".png")
         logo = logo.resize((50,50), Image.Resampling.LANCZOS)
         img.paste(logo,(400, int(y)-10), mask = logo)
         draw.text((52, y+2),playername,(0,0,0), font=font)
@@ -240,7 +240,7 @@ def createStatImage(df: pd.DataFrame, index: int):
         draw.text((827, y-5),str(stat),(0,0,0),font=fontBig)
         i += 1
 
-    img.save(f'C:/Users/eliasheimdal/Desktop/tables/Scripts/Output/{season}/{statname}.png')
+    img.save(f'/Users/eliasheimdal/Desktop/tables/Scripts/Output/{season}/{statname}.png')
 
 def main():
     print("\nUpdating stats:")
