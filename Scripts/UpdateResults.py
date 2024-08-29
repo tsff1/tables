@@ -6,39 +6,43 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-leagues = {"Energi FK": "A",
-           "NTNUI Samba": "A",
-           "Marin FK": "B",
-           "Omega FK": "C",
+leagues = {"Energi FK": "B",
+           "NTNUI Samba": "C",
+           "Marin FK": "A",
+           "Omega FK": "A",
            "HSK": "C",
-           "Janus FK": "B",
-           "Tihlde Pythons": "B",
-           "NTNUI Champs": "C",
+           "Janus FK": "C",
+           "Tihlde Pythons": "C",
+           "NTNUI Champs": "B",
            "FK Steindølene 1": "A",
-           "Pareto FK": "A",
-           "Wolves of Ballstreet": "B",
-           "Datakameratene FK": "A",
-           "Realkameratene FK": "D",
-           "Smøreguttene FK": "D",
-           "Hattfjelldal United": "B",
-           "Chemie FK": "E",
+           "Pareto FK": "B",
+           "Wolves of Ballstreet": "C",
+           "Datakameratene FK": "B",
+           "Realkameratene FK": "B",
+           "Smøreguttene FK": "C",
+           "Hattfjelldal United": "A",
+           "Chemie FK": "A",
            "Salt IF": "B",
-           "Petroleum FK": "D",
-           "Tim&Shænko": "D",
-           "CAF": "D",
-           "Omega Løkka": "D",
+           "Petroleum FK": "C",
+           "Tim&Shænko": "B",
+           "CAF": "B",
+           "Omega Løkka": "B",
            "FK Steindølene 2": "A",
-           "FK Hånd Til Munn": "C",
-           "Knekken":"E",
-           "MiT Fotball":"E",
-           "Hybrida FK": "C",
-           "Erudio Herrer": "C"}
+           "FK Hånd Til Munn": "A",
+           "Knekken":"A",
+           "MiT Fotball":"C",
+           "CKK": "C",
+           "Erudio Herrer": "A",
+           "FC BI United":"B",
+           "Elektra FK":"A",
+           "Sparkekameratene": "C",
+           "Dronning Maud FC": "C",}
 
-season = "V24"
+season = "H24"
 
 # Henter kamprapporter fra spreadsheet på nett
 def readFromWeb():
-    sheet_id = "2PACX-1vQuJYr5tl-zKfRpFUSsQaQ9yfxRa0U_k11gI9ke5PmFkBbdRROC5bLb8hks8r69KObhq4ISKapphr-9"
+    sheet_id = "1_uadIIN5-d0bXuVIzYO6vbe-QwbJOvgG2nwMbkJW8UY"
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/e/{sheet_id}/pub?output=csv")
 
 # Henter ut resultater fra spreadsheet dataframe
@@ -54,7 +58,7 @@ def getResults(data_raw):
 
 # Henter kampopsett fra fil på github
 def getMatches(avd):
-    with open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx', "rb") as file:
+    with open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/Avd-{avd.upper()}.xlsx', "rb") as file:
         file = pd.read_excel(file)
     return file
 
@@ -71,7 +75,7 @@ def insertResults(matches: pd.DataFrame, results, avd):
                 del results[str(row[0])+"-"+str(row[4])]
 
     # Justerer kolonne-bredder
-    writer = pd.ExcelWriter(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx') 
+    writer = pd.ExcelWriter(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}.xlsx') 
     matches.to_excel(writer, sheet_name='Sheet1', index=False, na_rep='')
 
     for column in matches:

@@ -7,35 +7,39 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-leagues = {"Energi FK": "A",
-           "NTNUI Samba": "A",
-           "Marin FK": "B",
-           "Omega FK": "C",
+leagues = {"Energi FK": "B",
+           "NTNUI Samba": "C",
+           "Marin FK": "A",
+           "Omega FK": "A",
            "HSK": "C",
-           "Janus FK": "B",
-           "Tihlde Pythons": "B",
-           "NTNUI Champs": "C",
+           "Janus FK": "C",
+           "Tihlde Pythons": "C",
+           "NTNUI Champs": "B",
            "FK Steindølene 1": "A",
-           "Pareto FK": "A",
-           "Wolves of Ballstreet": "B",
-           "Datakameratene FK": "A",
-           "Realkameratene FK": "D",
-           "Smøreguttene FK": "D",
-           "Hattfjelldal United": "B",
-           "Chemie FK": "E",
+           "Pareto FK": "B",
+           "Wolves of Ballstreet": "C",
+           "Datakameratene FK": "B",
+           "Realkameratene FK": "B",
+           "Smøreguttene FK": "C",
+           "Hattfjelldal United": "A",
+           "Chemie FK": "A",
            "Salt IF": "B",
-           "Petroleum FK": "D",
-           "Tim&Shænko": "D",
-           "CAF": "D",
-           "Omega Løkka": "D",
+           "Petroleum FK": "C",
+           "Tim&Shænko": "B",
+           "CAF": "B",
+           "Omega Løkka": "B",
            "FK Steindølene 2": "A",
-           "FK Hånd Til Munn": "C",
-           "Knekken":"E",
-           "MiT Fotball":"E",
-           "Hybrida FK": "C",
-           "Erudio Herrer": "C"}
+           "FK Hånd Til Munn": "A",
+           "Knekken":"A",
+           "MiT Fotball":"C",
+           "CKK": "C",
+           "Erudio Herrer": "A",
+           "FC BI United":"B",
+           "Elektra FK":"A",
+           "Sparkekameratene": "C",
+           "Dronning Maud FC": "C",}
 
-season = "V24"
+season = "H24"
 
 # Kode for spillerstatistikk
 # Funkjsonen bruker dataen gitt fra df laget av kamprapport spreadsheet
