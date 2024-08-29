@@ -8,10 +8,13 @@ import os.path
 from datetime import date
 
 def readFromWeb(avd):
-    if avd:
+    if avd=="b":
         sheet_id = "1IcfefQd7Vfdl9oxBo7I-5s_RRUrD9KWuSyBRyHUJeV8" # Avdeling B
-    else:
+    elif avd=="a":
         sheet_id = "1QrbXxgceluPlQ6mJEbF6kTMHP_8JL0mzYHS-oDM09O0" # Avdeling A
+    else:
+        sheet_id = "1QrbXxgceluPlQ6mJEbF6kTMHP_8JL0mzYHS-oDM09O0" # Avdeling C
+        
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv")
 
 def locateData(dataframe):

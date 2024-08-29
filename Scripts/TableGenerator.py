@@ -8,7 +8,7 @@ from PIL import ImageDraw
 from datetime import date
 import UpdateResults as ur
 
-season = "V24"
+season = "H24"
 
 # Henter data fra spreadsheet. 
 # return: pandas dataframe med data
@@ -18,6 +18,8 @@ def readFromWeb(avd):
         sheet_id = "1uBY1RF7wU22mnZYtn9lw_EFCmk9hPIMKyNQ-FXQrVi4" # Avdeling A
     elif avd == "b":
         sheet_id = "1PiVSrZUv9lZutOG7Wrpngx_lDfgfdc3Tj2ByerjBOJw" # Avdeling B
+    elif avd == "c":
+        sheet_id = "1G3O8ptER2072zfd8weVKiFh64pbhJp0IiVwwT0aIWbs" # Avdeling C
 
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv", verify=False)
 
@@ -123,7 +125,7 @@ def printTable(sortedTeams, teamNames):
 # teamNames: liste med lagnavn, avd: 0 = A, 1 = B
 # Lagres til Avd_X_table.png
 def createTable(sortedTeams, teamNames, avd, nteams):
-    img = Image.open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Backgrounds/V24/Table_bg_{avd.upper()}_{season}.png')
+    img = Image.open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Backgrounds/Tabel_bg_{avd.upper()}_{season}.png')
     size = img.size[1]
     ydab = size/(nteams+1)
     draw = ImageDraw.Draw(img)
@@ -140,7 +142,7 @@ def createTable(sortedTeams, teamNames, avd, nteams):
             x = 407 + j * 60
             draw.text((x, y),str(int(col)),(0,0,0),font=font)
 
-    img.save(f'/Users/eliasheimdal/Desktop/tables/Scripts/Output/{season}/' + avd.upper() + '-sluttspill_table.png')
+    img.save(f'/Users/eliasheimdal/Desktop/tables/Scripts/Output/{season}/' + avd.upper() + '-table.png')
 
 def updateTime(avd, stats = False):
     today = date.today()
@@ -152,7 +154,7 @@ def updateTime(avd, stats = False):
     if stats:
         img.save(f'/Users/eliasheimdal/Desktop/tables/Scripts/Output/{season}/Stats_Update.png')
     else:
-        img.save(f'/Users/eliasheimdal/Desktop/tables/Scripts/Output/{season}/'+ avd.upper()+ '-sluttspill_Update.png')
+        img.save(f'/Users/eliasheimdal/Desktop/tables/Scripts/Output/{season}/'+ avd.upper()+ '-Update.png')
 
 def main(avd, nteams):
     ur.main(avd)
