@@ -33,9 +33,9 @@ leagues = {"Energi FK": "B",
            "Knekken":"A",
            "MiT Fotball":"C",
            "CKK": "C",
+           "Elektra FK":"A",
            "Erudio Herrer": "A",
            "FC BI United":"B",
-           "Elektra FK":"A",
            "Sparkekameratene": "C",
            "Dronning Maud FC": "C",}
 

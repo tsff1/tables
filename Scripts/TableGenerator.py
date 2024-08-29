@@ -125,7 +125,7 @@ def printTable(sortedTeams, teamNames):
 # teamNames: liste med lagnavn, avd: 0 = A, 1 = B
 # Lagres til Avd_X_table.png
 def createTable(sortedTeams, teamNames, avd, nteams):
-    img = Image.open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Backgrounds/Tabel_bg_{avd.upper()}_{season}.png')
+    img = Image.open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Backgrounds/Tabel_bg_{avd.upper()}_{season}.jpg')
     size = img.size[1]
     ydab = size/(nteams+1)
     draw = ImageDraw.Draw(img)

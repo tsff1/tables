@@ -32,9 +32,9 @@ leagues = {"Energi FK": "B",
            "Knekken":"A",
            "MiT Fotball":"C",
            "CKK": "C",
+           "Elektra FK":"A",
            "Erudio Herrer": "A",
            "FC BI United":"B",
-           "Elektra FK":"A",
            "Sparkekameratene": "C",
            "Dronning Maud FC": "C",}
 
@@ -43,7 +43,7 @@ season = "H24"
 # Henter kamprapporter fra spreadsheet på nett
 def readFromWeb():
     sheet_id = "19p7VC_GRwxeGJDk2_BUPEhSqhmIp6OggawUzmvvKxWQ"
-    return pd.read_csv(f"https://docs.google.com/spreadsheets/d/e/{sheet_id}/pub?output=csv")
+    return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/pub?output=csv")
 
 # Henter ut resultater fra spreadsheet dataframe
 # Returnerer dict på format {"Hjemmelag-Bortelag": "3-1", "Hjemmelag-Bortelag": "0-1", ...}
@@ -75,7 +75,7 @@ def insertResults(matches: pd.DataFrame, results, avd):
                 del results[str(row[0])+"-"+str(row[4])]
 
     # Justerer kolonne-bredder
-    writer = pd.ExcelWriter(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}.xlsx') 
+    writer = pd.ExcelWriter(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/Avd-{avd.upper()}.xlsx') 
     matches.to_excel(writer, sheet_name='Sheet1', index=False, na_rep='')
 
     for column in matches:
