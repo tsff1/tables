@@ -50,9 +50,14 @@ def readFromWeb():
 def getResults(data_raw):
     results = {}
     for index, row in data_raw.iterrows():
-        #print(row[1], row[2])
-        key = row[1]+"-"+row[2]
-        val = row[5]
+        # Convert row[1] and row[2] to strings and handle NaN values
+        key = str(row[1]) if pd.notna(row[1]) else ""
+        key += "-" + (str(row[2]) if pd.notna(row[2]) else "")
+        
+        # Ensure val is also handled correctly
+        val = row[5] if pd.notna(row[5]) else None
+        
+        # Store the result
         results[key] = val
     return results
 
