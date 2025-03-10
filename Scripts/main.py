@@ -29,5 +29,5 @@ if stats == "y":
     us.main()
 
 print("\nSyncing updates...")
-git_push()
+# git_push()
 print("Done")

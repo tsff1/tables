@@ -15,15 +15,15 @@ season = "V25"
 def readFromWeb(avd):
     avd = avd.lower()
     if avd == "a":
-        sheet_id = "1uBY1RF7wU22mnZYtn9lw_EFCmk9hPIMKyNQ-FXQrVi4" # Avdeling A
+        sheet_id = "1h-EGu8ROHBv04nqdhhvT3wQmFzWIvpPG4aUujfGwdmI" # Sluttspill A
     elif avd == "b":
-        sheet_id = "1PiVSrZUv9lZutOG7Wrpngx_lDfgfdc3Tj2ByerjBOJw" # Avdeling B
+        sheet_id = "1P9xLBwLwYf7jh-BulnsDAf1LmURftxupsi7fX_I8OE4" # Sluttspill B
     elif avd == "c":
-        sheet_id = "1G3O8ptER2072zfd8weVKiFh64pbhJp0IiVwwT0aIWbs" # Avdeling C
+        sheet_id = "1nyB8S0EId5ZYwuWht3a88WKrHYaH-rN7vJy2M3ChuNk" # Sluttspill C
     elif avd == "d":
-        sheet_id = "1zL4H1wzYkCzJ4lVY0p6G6Q1Y1j1HvXtR7HJZ2D2d1W0"
+        sheet_id = "1bHR14x_Q20B-WPMojQ3tqj6frJYuxJQz5_oQ0F_9SBs" # Sluttspill D
     elif avd == "e":
-        sheet_id = "1k3Xv6YXg7o8JN2cQ3G4H9Zzqf6Vx9e1X2y2J1X7oYj4"
+        sheet_id = "1M5VCjrirY4kH-3yQ2Bj2RXQpfBR-5VbNKBzmbQeK0eE" # Sluttspill E
 
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv", verify=False)
 

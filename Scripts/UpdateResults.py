@@ -42,7 +42,7 @@ season = "V25"
 
 # Henter kamprapporter fra spreadsheet på nett
 def readFromWeb():
-    sheet_id = "1_uadIIN5-d0bXuVIzYO6vbe-QwbJOvgG2nwMbkJW8UY"
+    sheet_id = "19p7VC_GRwxeGJDk2_BUPEhSqhmIp6OggawUzmvvKxWQ"
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/pub?output=csv")
 
 # Henter ut resultater fra spreadsheet dataframe
@@ -63,7 +63,7 @@ def getResults(data_raw):
 
 # Henter kampopsett fra fil på github
 def getMatches(avd):
-    with open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/Avd-{avd.upper()}.xlsx', "rb") as file:
+    with open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx', "rb") as file:
         file = pd.read_excel(file)
     return file
 
@@ -80,7 +80,7 @@ def insertResults(matches: pd.DataFrame, results, avd):
                 del results[str(row[0])+"-"+str(row[4])]
 
     # Justerer kolonne-bredder
-    writer = pd.ExcelWriter(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/Avd-{avd.upper()}.xlsx') 
+    writer = pd.ExcelWriter(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx') 
     matches.to_excel(writer, sheet_name='Sheet1', index=False, na_rep='')
 
     for column in matches:
