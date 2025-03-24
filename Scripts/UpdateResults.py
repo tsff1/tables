@@ -63,7 +63,7 @@ def getResults(data_raw):
 
 # Henter kampopsett fra fil på github
 def getMatches(avd):
-    with open(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx', "rb") as file:
+    with open(f'/Users/evenlandmark/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx', "rb") as file:
         file = pd.read_excel(file)
     return file
 
@@ -80,7 +80,7 @@ def insertResults(matches: pd.DataFrame, results, avd):
                 del results[str(row[0])+"-"+str(row[4])]
 
     # Justerer kolonne-bredder
-    writer = pd.ExcelWriter(f'/Users/eliasheimdal/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx') 
+    writer = pd.ExcelWriter(f'/Users/evenlandmark/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx') 
     matches.to_excel(writer, sheet_name='Sheet1', index=False, na_rep='')
 
     for column in matches:
