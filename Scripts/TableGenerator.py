@@ -8,22 +8,19 @@ from PIL import ImageDraw
 from datetime import date
 import UpdateResults as ur
 
-season = "V25"
+season = "H25"
 
 # Henter data fra spreadsheet. 
 # return: pandas dataframe med data
 def readFromWeb(avd):
     avd = avd.lower()
     if avd == "a":
-        sheet_id = "1h-EGu8ROHBv04nqdhhvT3wQmFzWIvpPG4aUujfGwdmI" # Sluttspill A
+        sheet_id = "1YagEDfZ74rcXtVhKpMMIqDHuvG79MttZ4pxhgMhJeV4" # Avdeling A
     elif avd == "b":
-        sheet_id = "1P9xLBwLwYf7jh-BulnsDAf1LmURftxupsi7fX_I8OE4" # Sluttspill B
+        sheet_id = "1E09syJYfh9-lPRU5nZH5DpDsrVuGwyrQ08DJU6VTVFM" # Avdeling B
     elif avd == "c":
-        sheet_id = "1nyB8S0EId5ZYwuWht3a88WKrHYaH-rN7vJy2M3ChuNk" # Sluttspill C
-    elif avd == "d":
-        sheet_id = "1bHR14x_Q20B-WPMojQ3tqj6frJYuxJQz5_oQ0F_9SBs" # Sluttspill D
-    elif avd == "e":
-        sheet_id = "1M5VCjrirY4kH-3yQ2Bj2RXQpfBR-5VbNKBzmbQeK0eE" # Sluttspill E
+        sheet_id = "1vyfUlhtMjWfhk7CrihnZ8AZsgVfPKNgctIgwJXdyYFY" # Avdeling C
+
 
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv", verify=False)
 
@@ -129,7 +126,7 @@ def printTable(sortedTeams, teamNames):
 # teamNames: liste med lagnavn, avd: 0 = A, 1 = B
 # Lagres til Avd_X_table.png
 def createTable(sortedTeams, teamNames, avd, nteams):
-    img = Image.open(f'/Users/evenlandmark/Desktop/tables/Scripts/Backgrounds/V25/Tabel_bg_{avd.upper()}_{season}.png')
+    img = Image.open(f'/Users/evenlandmark/Desktop/tables/Scripts/Backgrounds/H25/Tabel_bg_{avd.upper()}_{season}.jpg')
     size = img.size[1]
     ydab = size/(nteams+1)
     draw = ImageDraw.Draw(img)

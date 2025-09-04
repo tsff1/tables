@@ -7,42 +7,40 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
 leagues = {"Energi FK": "B",
-           "NTNUI Samba": "A",
-           "Marin FK": "A",
-           "Omega FK": "C",
+           "NTNUI Samba": "B",
+           "Marin FK": "B",
+           "Omega FK": "B",
            "HSK": "C",
-           "Janus FK": "B",
-           "Tihlde Pythons": "B",
-           "NTNUI Champs": "C",
+           "Janus FK": "A",
+           "Tihlde Pythons": "C",
+           "NTNUI Champs": "A",
            "FK Steindølene 1": "A",
-           "Pareto FK": "B",
+           "Pareto FK": "C",
            "Wolves of Ballstreet": "A",
-           "Datakameratene FK": "A",
+           "Datakameratene FK": "B",
            "Realkameratene FK": "C",
-           "Smøreguttene FK": "D",
-           "Hattfjelldal United": "B",
-           "Chemie FK": "E",
-           "SALT IF": "A",
-           "Petroleum FK": "E",
-           "Tim&Shænko": "D",
-           "CAF": "E",
-           "Omega Løkka": "E",
-           "FK Steindølene 2": "B",
-           "FK Hånd til Munn": "C",
-           "Knekken":"D",
-           "MiT Fotball":"E",
-           "CKK": "D",
-           "Elektra FK":"E",
-           "Erudio Herrer": "D",
-           "FC BI United":"D",
-           "Sparkekameratene": "C",
-           "Dronning Maud FC": "E",}
+           "Smøreguttene FK": "A",
+           "Chemie FK": "A",
+           "SALT IF": "C",
+           "Petroleum FK": "A",
+           "Tim&Shænko": "A",
+           "CAF": "B",
+           "Omega Løkka": "C",
+           "FK Steindølene 2": "A",
+           "FK Hånd til Munn": "B",
+           "Hybrida FK":"B",
+           "MiT Fotball":"C",
+           "Gladlaksen": "A",
+           "Elektra FK":"B",
+           "Erudio Herrer": "B",
+           "FC BI United": "C",
+           "Fornybar Stallions": "C",}
 
-season = "V25"
+season = "H25"
 
 # Henter kamprapporter fra spreadsheet på nett
 def readFromWeb():
-    sheet_id = "19p7VC_GRwxeGJDk2_BUPEhSqhmIp6OggawUzmvvKxWQ"
+    sheet_id = "1EZOtOifu8_upktLS3_u9tI9oOWazQr6jLMinJnU-wG0"
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/{sheet_id}/pub?output=csv")
 
 # Henter ut resultater fra spreadsheet dataframe
