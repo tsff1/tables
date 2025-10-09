@@ -48,6 +48,9 @@ def getStats(data_raw: pd.DataFrame) -> dict:
         home = row[1]
         away = row[2]
 
+        print(f"Processing row {index} for {home} - {away}")
+
+
         homePlayers = {}
         for elem in row[6].split("\n"):
             i = 1
