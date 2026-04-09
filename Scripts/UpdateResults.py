@@ -39,7 +39,7 @@ season = "V26"
 
 # Henter kamprapporter fra spreadsheet på nett
 def readFromWeb():
-    sheet_id = "2PACX-1vThxyUiWNMLWw7oBp_w3IEtExtrCntRoskUuNlmEZxFgpqM_ucVoSh2EJsGzpKloL5rUTtvKcN2k7Se"  #"2PACX-1vQ86e6KlT5lYqGXgEF8AWNJIo7KMy-0WT1COZ4KsjuJ2hVi3N0ObXxd2Baq1q72O68cpdFoQb_ifWQE"  #"1EZOtOifu8_upktLS3_u9tI9oOWazQr6jLMinJnU-wG0"
+    sheet_id = "2PACX-1vQ64AYvtBLnEvPyn1av8Th3Px2rv0bIP0Rd1fCEK8Y5AUTWdG2VAf2oHxMrrzs0gcGF1rdDqDhFX4HL"  #"2PACX-1vQ86e6KlT5lYqGXgEF8AWNJIo7KMy-0WT1COZ4KsjuJ2hVi3N0ObXxd2Baq1q72O68cpdFoQb_ifWQE"  #"1EZOtOifu8_upktLS3_u9tI9oOWazQr6jLMinJnU-wG0"
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/e/{sheet_id}/pub?output=csv")
 
 # Henter ut resultater fra spreadsheet dataframe
