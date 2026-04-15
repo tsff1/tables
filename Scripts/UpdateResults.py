@@ -39,7 +39,7 @@ season = "V26"
 
 # Henter kamprapporter fra spreadsheet på nett
 def readFromWeb():
-    sheet_id = "19p7VC_GRwxeGJDk2_BUPEhSqhmIp6OggawUzmvvKxWQ"  #"2PACX-1vQ86e6KlT5lYqGXgEF8AWNJIo7KMy-0WT1COZ4KsjuJ2hVi3N0ObXxd2Baq1q72O68cpdFoQb_ifWQE"  #"1EZOtOifu8_upktLS3_u9tI9oOWazQr6jLMinJnU-wG0"
+    sheet_id = "2PACX-1vQ64AYvtBLnEvPyn1av8Th3Px2rv0bIP0Rd1fCEK8Y5AUTWdG2VAf2oHxMrrzs0gcGF1rdDqDhFX4HL"  #"2PACX-1vQ86e6KlT5lYqGXgEF8AWNJIo7KMy-0WT1COZ4KsjuJ2hVi3N0ObXxd2Baq1q72O68cpdFoQb_ifWQE"  #"1EZOtOifu8_upktLS3_u9tI9oOWazQr6jLMinJnU-wG0"
     return pd.read_csv(f"https://docs.google.com/spreadsheets/d/e/{sheet_id}/pub?output=csv")
 
 # Henter ut resultater fra spreadsheet dataframe
@@ -48,11 +48,13 @@ def getResults(data_raw):
     results = {}
     for index, row in data_raw.iterrows():
         # Convert row[1] and row[2] to strings and handle NaN values
-        key = str(row[1]) if pd.notna(row[1]) else ""
-        key += "-" + (str(row[2]) if pd.notna(row[2]) else "")
+        
+    
+        key = str(row["1"]) if pd.notna(row["1"]) else ""
+        key += "-" + (str(row["2"]) if pd.notna(row["2"]) else "")
         
         # Ensure val is also handled correctly
-        val = row[5] if pd.notna(row[5]) else None
+        val = row["5"] if pd.notna(row["5"]) else None
         
         # Store the result
         results[key] = val
@@ -60,7 +62,7 @@ def getResults(data_raw):
 
 # Henter kampopsett fra fil på github
 def getMatches(avd):
-    with open(f'/Users/evenlandmark/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx', "rb") as file:
+    with open(f'C:/Users/alfha/OneDrive - NTNU/vår 26/tsff vs code/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx', "rb") as file:
         file = pd.read_excel(file)
     return file
 
@@ -77,7 +79,7 @@ def insertResults(matches: pd.DataFrame, results, avd):
                 del results[str(row[0])+"-"+str(row[4])]
 
     # Justerer kolonne-bredder
-    writer = pd.ExcelWriter(f'/Users/evenlandmark/Desktop/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx') 
+    writer = pd.ExcelWriter(f'C:/Users/alfha/OneDrive - NTNU/vår 26/tsff vs code/tables/Scripts/Kamper/{season}/{avd.upper()}-sluttspill.xlsx') 
     matches.to_excel(writer, sheet_name='Sheet1', index=False, na_rep='')
 
     for column in matches:

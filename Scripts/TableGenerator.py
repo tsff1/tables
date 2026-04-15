@@ -131,16 +131,16 @@ def printTable(sortedTeams, teamNames):
 # teamNames: liste med lagnavn, avd: 0 = A, 1 = B
 # Lagres til Avd_X_table.png
 def createTable(sortedTeams, teamNames, avd, nteams):
-    img = Image.open(f'/Users/evenlandmark/Desktop/tables/Scripts/Backgrounds/V26/Tabel_bg_{avd.upper()}_{season}.png')
+    img = Image.open(f'C:/Users/alfha/OneDrive - NTNU/vår 26/tsff vs code/tables/Scripts/Backgrounds/V26/Tabel_bg_{avd.upper()}_{season}.png')
     size = img.size[1]
     ydab = size/(nteams+1)
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("/Users/evenlandmark/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
+    font = ImageFont.truetype("C:/Users/alfha/OneDrive - NTNU/vår 26/tsff vs code/tables/Scripts/Fonts/Aller_Bd.ttf", 25)
 
     for i, row in enumerate(sortedTeams):
         name = teamNames[int(row[0])]
         y = (i+2)*ydab - 53
-        logo = Image.open("/Users/evenlandmark/Desktop/tables/Scripts/Logoer - Runde/" + name + ".png")
+        logo = Image.open("C:/Users/alfha/OneDrive - NTNU/vår 26/tsff vs code/tables/Scripts/Logoer - Runde/" + name + ".png")
         logo = logo.resize((50,50), Image.Resampling.LANCZOS)
         img.paste(logo,(55, int(y)-10), mask = logo)
         draw.text((115, y),name,(0,0,0), font=font)
@@ -148,19 +148,19 @@ def createTable(sortedTeams, teamNames, avd, nteams):
             x = 407 + j * 60
             draw.text((x, y),str(int(col)),(0,0,0),font=font)
 
-    img.save(f'/Users/evenlandmark/Desktop/tables/Scripts/Output/{season}/' + avd.upper() + '-table.png')
+    img.save(f'C:/Users/alfha/OneDrive - NTNU/vår 26/tsff vs code/tables/Scripts/Output/{season}/' + avd.upper() + '-table.png')
 
 def updateTime(avd, stats = False):
     today = date.today()
-    img = Image.open('/Users/evenlandmark/Desktop/tables/Scripts/Backgrounds/Time_bg.png')
+    img = Image.open('C:/Users/alfha/OneDrive - NTNU/vår 26/tsff vs code/tables/Scripts/Backgrounds/Time_bg.png')
     img = img.resize((400, 40), Image.Resampling.LANCZOS)
-    fontT = ImageFont.truetype("/Users/evenlandmark/Desktop/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
+    fontT = ImageFont.truetype("C:/Users/alfha/OneDrive - NTNU/vår 26/tsff vs code/tables/Scripts/Fonts/Aller_Bd.ttf", 30)
     draw = ImageDraw.Draw(img)
     draw.text((20, 0),"Sist oppdatert: " + today.strftime("%d/%m/%Y"),(0,0,0),font=fontT)
     if stats:
-        img.save(f'/Users/evenlandmark/Desktop/tables/Scripts/Output/{season}/Stats_Update.png')
+        img.save(f'C:/Users/alfha/OneDrive - NTNU/vår 26/tsff vs code/tables/Scripts/Output/{season}/Stats_Update.png')
     else:
-        img.save(f'/Users/evenlandmark/Desktop/tables/Scripts/Output/{season}/'+ avd.upper()+ '-Update.png')
+        img.save(f'C:/Users/alfha/OneDrive - NTNU/vår 26/tsff vs code/tables/Scripts/Output/{season}/'+ avd.upper()+ '-Update.png')
 
 def main(avd, nteams):
     ur.main(avd)
